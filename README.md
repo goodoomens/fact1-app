@@ -2,7 +2,7 @@
 
 # Fact1 - F1 App
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/debdf2e2-cae0-45ff-b5f3-f3cbc8ab0ced/deploy-status)](https://app.netlify.com/sites/fact1/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/31493c86-691a-4511-9260-63e6dfa3b3a4/deploy-status)](https://app.netlify.com/sites/fact1/deploys)
 
 In order to follow the current Formula 1 season I wrote this simple, fast and most importantly mobile friendly app.
 
