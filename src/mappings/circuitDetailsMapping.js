@@ -1,0 +1,142 @@
+const circuitDetails = {
+  albert_park: {
+    length: 5303,
+    laps: 58,
+    tireDeg: 1,
+    brakeDeg: 1,
+  },
+  americas: {
+    length: 5516,
+    laps: 56,
+    tireDeg: 1,
+    brakeDeg: 1,
+  },
+  bahrain: {
+    length: 5412,
+    laps: 57,
+    tireDeg: 1,
+    brakeDeg: 1,
+  },
+  baku: {
+    length: 6003,
+    laps: 51,
+    tireDeg: 1,
+    brakeDeg: 2,
+  },
+  catalunya: {
+    length: 4675,
+    laps: 66,
+    tireDeg: 1,
+    brakeDeg: 1,
+  },
+  hungaroring: {
+    length: 4381,
+    laps: 70,
+    tireDeg: 1,
+    brakeDeg: 0,
+  },
+  imola: {
+    length: 4959,
+    laps: 63,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+  interlagos: {
+    length: 4309,
+    laps: 71,
+    tireDeg: 1,
+    brakeDeg: 1,
+  },
+  jeddah: {
+    length: 6174,
+    laps: 50,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+  losail: {
+    length: 5380,
+    laps: 57,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+  marina_bay: {
+    length: 5063,
+    laps: 61,
+    tireDeg: 1,
+    brakeDeg: 2,
+  },
+  miami: {
+    length: 5410,
+    laps: 57,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+  monaco: {
+    length: 3337,
+    laps: 78,
+    tireDeg: 2,
+    brakeDeg: 2,
+  },
+  monza: {
+    length: 5793,
+    laps: 53,
+    tireDeg: 0,
+    brakeDeg: 1,
+  },
+  red_bull_ring: {
+    length: 4326,
+    laps: 71,
+    tireDeg: 0,
+    brakeDeg: 2,
+  },
+  rodriguez: {
+    length: 4304,
+    laps: 71,
+    tireDeg: 1,
+    brakeDeg: 2,
+  },
+  silverstone: {
+    length: 5891,
+    laps: 52,
+    tireDeg: 1,
+    brakeDeg: 2,
+  },
+  spa: {
+    length: 7004,
+    laps: 44,
+    tireDeg: 0,
+    brakeDeg: 2,
+  },
+  suzuka: {
+    length: 5807,
+    laps: 53,
+    tireDeg: 2,
+    brakeDeg: 0,
+  },
+  vegas: {
+    length: 6120,
+    laps: 50,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+  villeneuve: {
+    length: 4361,
+    laps: 70,
+    tireDeg: 0,
+    brakeDeg: 2,
+  },
+  yas_marina: {
+    length: 5281,
+    laps: 58,
+    tireDeg: 0,
+    brakeDeg: 1,
+  },
+  zandvoort: {
+    length: 4259,
+    laps: 72,
+    tireDeg: 3,
+    brakeDeg: 3,
+  },
+};
+
+export default circuitDetails;
