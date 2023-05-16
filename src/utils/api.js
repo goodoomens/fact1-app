@@ -8,12 +8,12 @@ const apiUrls = {
     local: require("@/api/f1_current.json"),
   },
   driverStandings: {
-    api: "http://ergast.com/api/f1/current/driverStandings.json",
+    api: "https://ergast.com/api/f1/current/driverStandings.json",
     path: "MRData.StandingsTable.StandingsLists[0].DriverStandings",
     local: require("@/api/f1_current_driverStandings.json"),
   },
   constructorStandings: {
-    api: "http://ergast.com/api/f1/current/constructorStandings.json",
+    api: "https://ergast.com/api/f1/current/constructorStandings.json",
     path: "MRData.StandingsTable.StandingsLists[0].ConstructorStandings",
     local: require("@/api/f1_current_constructorStandings.json"),
   },
