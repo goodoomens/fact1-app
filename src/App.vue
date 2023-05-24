@@ -37,19 +37,18 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap");
-
-/* 
-Breakpoints
-1: 1200px
-2: 900px
-3: 800px
-4: 560px
-5: 400px
-6: 320px
-7: 250px
-*/
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/inter.woff2") format("woff2"),
+    url("./fonts/inter.woff") format("woff"),
+    url("./fonts/inter.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Inconsolata";
+  src: url("./fonts/inconsolata.woff2") format("woff2"),
+    url("./fonts/inconsolata.woff") format("woff"),
+    url("./fonts/inconsolata.ttf") format("truetype");
+}
 
 :root {
   /* Colors */
@@ -97,7 +96,7 @@ Breakpoints
   --card-gap-inner: 3rem;
   --card-gap-between: 0.5rem;
   /* Times */
-  --times-font-family: "Inconsolata", monospace;
+  --times-font-family: "Inconsolata", Fallback, monospace;
   --times-font-size: 1.6rem;
   --times-indicator-size: 1rem;
   /* Driver Standings */
@@ -156,7 +155,7 @@ html {
   overflow-y: scroll;
 }
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", Fallback, sans-serif;
   background-color: var(--bg-color-body);
   color: var(--text-color-prim);
   transition: background-color 0.3s ease-in-out;
