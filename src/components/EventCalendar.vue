@@ -56,16 +56,30 @@ export default {
       }
     },
     findUpcomingEvent() {
+      const currentDateNoTime = new Date(
+        this.currentDate.getFullYear(),
+        this.currentDate.getMonth(),
+        this.currentDate.getDate()
+      );
+
       const upcomingEvents = this.events.filter((event) => {
         const raceDate = new Date(event.date);
-        return raceDate >= this.currentDate;
+        const raceDateNoTime = new Date(
+          raceDate.getFullYear(),
+          raceDate.getMonth(),
+          raceDate.getDate()
+        );
+        return raceDateNoTime >= currentDateNoTime;
       });
+
       Store.mutations.setUpcomingEvent(upcomingEvents[0]);
       Store.mutations.setHighlightEvent(upcomingEvents[0]);
+
       console.log(
         `*** Upcoming event found: ${upcomingEvents[0].raceName} @ ${upcomingEvents[0].date} ***`
       );
     },
+
     changeCard(e) {
       const arrowKeys = [37, 38, 39, 40];
 
