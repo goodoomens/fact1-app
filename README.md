@@ -11,9 +11,20 @@ A modern, responsive Formula 1 application built with Vue 3 that provides real-t
 - **📱 Responsive Design** - Optimized for desktop and mobile devices
 - **🎨 Modern UI** - Built with Tailwind CSS and PrimeVue components
 
+## 📋 Upcoming Features (TODO)
+
+- **🏆 Team Standings Redesign** - Update team standings to fit the overall design
+- **🖼️ Missing Assets** - Add missing circuit SVGs and circuit banners
+- **⚙️ Settings Tab** - Customize language, units, and display mode (light/dark)
+- **👤 Driver Detail Pages** - Individual driver profiles and statistics
+- **🏁 Race Results** - Show top 3 results for past races
+- **🌤️ Weather Forecast** - Weather predictions for upcoming races
+- **⚖️ Driver Comparison** - Compare drivers per circuit performance
+- **💻 Desktop Enhancement** - Make the interface more visually appealing for desktop users
+
 ## 🛠️ Tech Stack
 
-- **Frontend**: Vue 3 with Composition API & `<script setup>`
+- **Frontend**: Vue 3 with Composition API
 - **Language**: TypeScript
 - **Build Tool**: Vite
 - **State Management**: Pinia

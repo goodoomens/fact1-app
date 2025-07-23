@@ -27,23 +27,22 @@ loadRaces()
 
 const { getParameter, goTo } = useApp()
 const circuitId = getParameter('circuitId')
-const race = circuitId ? getRaceByCircuitId(circuitId) : nextRace.value
+const race = circuitId ? getRaceByCircuitId(circuitId) : nextRace
 const actualCircuitId = race?.Circuit?.circuitId || 'default'
 const image = computed(
   () => circuitIdImage[actualCircuitId] || circuitIdImage['default']
 )
 const details = computed(
   () =>
-    circuitIdTrackDetails[actualCircuitId] ||
-    circuitIdTrackDetails['default']
+    circuitIdTrackDetails[actualCircuitId] || circuitIdTrackDetails['default']
 )
 
-const detailsDisplay = computed(() => {
+const detailsDisplay = computed((): Record<string, string> => {
   if (!race) return {}
   const { length, laps } = details.value
   return {
     circuitName: race.Circuit.circuitName,
-    laps,
+    laps: laps.toString(),
     length: `${(length / 1000).toFixed(2)} km`,
     distance: `${((length * laps) / 1000).toFixed(2)} km`,
     brakeDeg: details.value.brakeDeg,
@@ -51,7 +50,9 @@ const detailsDisplay = computed(() => {
   }
 })
 
-const schedulDisplay = computed(() => {
+const schedulDisplay = computed((): Record<string, string> => {
+  if (!race) return {}
+
   const {
     FirstPractice: fp1,
     SprintQualifying: sq,
@@ -71,7 +72,7 @@ const schedulDisplay = computed(() => {
     sprintRace: s && formatTime(s.date, s.time, formatOptions),
     qualifying: q && formatTime(q.date, q.time, formatOptions),
     race: formatTime(race.date, race.time, formatOptions),
-  })
+  }) as Record<string, string>
 })
 
 const getBgClass = (degradation: Degradation) =>
@@ -84,7 +85,10 @@ const detailIconMap = {
 </script>
 
 <template>
-  <div class="bg-gray-100 w-full h-full flex flex-col items-start">
+  <div v-if="!race" class="flex items-center justify-center h-64">
+    <span class="text-gray-500">Race not found</span>
+  </div>
+  <div v-else class="bg-gray-100 w-full h-full flex flex-col items-start">
     <Button
       class="m-2"
       size="small"
@@ -130,11 +134,14 @@ const detailIconMap = {
           :items="detailsDisplay"
           columns="2/3"
         >
-          <template #key="{ props: { key, value } }">
+          <template #key="{ props: { key } }">
             <span>{{ $t(`details.${key}`) }}</span>
           </template>
           <template #value="{ props: { key, value } }">
-            <Tag v-if="value in Degradation" :class="[getBgClass(value)]">
+            <Tag
+              v-if="value in Degradation"
+              :class="[getBgClass(value as Degradation)]"
+            >
               <img class="h-3" :src="detailIconMap[key]" />
               {{ $t(`degradation.${value}`) }}
             </Tag>
