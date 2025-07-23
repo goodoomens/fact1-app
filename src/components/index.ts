@@ -1,0 +1,7 @@
+export { default as ImgIcon } from './src/ImgIcon.vue'
+export { default as Menu } from './src/Menu.vue'
+export { default as MenuButton } from './src/MenuButton.vue'
+export { default as ObjectTable } from './src/ObjectTable.vue'
+export { default as RaceCalendarCard } from './src/RaceCalendarCard.vue'
+export { default as RoundTag } from './src/RoundTag.vue'
+export { default as SmallTag } from './src/SmallTag.vue'
