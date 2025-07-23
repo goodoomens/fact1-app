@@ -1,3 +1,5 @@
+## ⚠️ Notice: This application is currently undergoing a rewrite due to the deprecation of its underlying API. Functionality may be limited or unavailable during this process.
+
 <img alt="Schlitterio Logo" src="src/assets/fact1_logo.png" width="20%" />
 
 # Fact1 - F1 App
