@@ -2,6 +2,9 @@
 
 A modern, responsive Formula 1 application built with Vue 3 that provides real-time race information, driver standings, team standings, and race calendars.
 
+## Live Demo
+[Fact1 on Netlify](https://fact1.netlify.app)
+
 ## ✨ Features
 
 - **📅 Race Calendar** - View upcoming and past F1 races with circuit information
