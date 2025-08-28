@@ -45,7 +45,7 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
 
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
-  <div v-else class="flex flex-col w-full">
+  <div v-else class="flex flex-col w-full h-full">
     <div class="flex justify-end p-2">
       <Button
         size="small"

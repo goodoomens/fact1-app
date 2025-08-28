@@ -88,14 +88,15 @@ onMounted(loadRaces)
     <span class="text-neutral-500">Race not found</span>
   </div>
   <div v-else class="w-full h-full flex flex-col items-start">
-    <Button
-      class="m-2"
-      size="small"
-      variant="text"
-      :label="$t('actions.backToCalendar')"
-      icon="pi pi-chevron-left"
-      @click="goTo('calendar')"
-    />
+    <div class="p-2">
+      <Button
+        size="small"
+        variant="text"
+        :label="$t('actions.backToCalendar')"
+        icon="pi pi-chevron-left"
+        @click="goTo('calendar')"
+      />
+    </div>
     <div class="bg-white dark:bg-neutral-800 grid grid-cols-1 w-full">
       <div
         class="h-48 sm:h-64 md:h-88 bg-bottom bg-cover flex flex-col gap-4 items-start justify-end p-6"
