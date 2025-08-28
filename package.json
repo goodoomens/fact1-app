@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@primeuix/styles": "^1.2.3",
     "@primeuix/themes": "^1.1.1",
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
@@ -31,6 +32,8 @@
     "@types/node": "^24.1.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
+    "estree-walker": "^3.0.3",
+    "source-map-js": "^1.2.1",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vue-tsc": "^2.2.8"
