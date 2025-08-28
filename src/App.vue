@@ -4,10 +4,13 @@ import { routes } from '@/router'
 import {
   useRacesStore,
   useDriverStandingsStore,
-  useTeamStandingsStore,
+  useTeamStandingsStore
 } from '@/stores'
 
 import { Menu, MenuButton } from '@/components'
+import Overlay from '@/views/Overlay.vue'
+
+import fact1_logo from '@/assets/fact1_logo.svg'
 
 const { loadRaces } = useRacesStore()
 const { loadDriverStandings } = useDriverStandingsStore()
@@ -22,8 +25,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-gray-100 h-dvh flex flex-col">
-    <div class="sticky top-0 z-50">
+  <div class="bg-gray-100 h-dvh flex flex-col relative">
+
+    <Overlay />
+
+    <div class="sticky top-0 z-20">
       <div
         class="bg-gradient-to-r from-red-500 to-red-800 shadow-md z-10 flex justify-center"
       >
@@ -31,9 +37,10 @@ onMounted(() => {
           class="w-full max-w-3xl flex items-center justify-between px-5 py-3"
         >
           <MenuButton v-model="menuIsOpen" />
-          <div class="flex flex-col items-end text-white">
-            <span class="text-2xl font-black leading-6">Fact1</span>
-            <span class="text-xs">Season 2025</span>
+          <div class="flex flex-col items-end text-white gap-2">
+            <!--<span class="text-2xl font-black leading-6">Fact1</span>-->
+            <img class="h-6" alt="Fact1" :src="fact1_logo" />
+            <span class="text-xs leading-2">{{ $t('global.season') }} 2025</span>
           </div>
         </div>
       </div>

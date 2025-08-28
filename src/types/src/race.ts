@@ -29,5 +29,4 @@ export type Race = {
   SprintQualifying?: Event
 }
 
-// This ensures the file is treated as a module
 export {}

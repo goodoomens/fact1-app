@@ -9,24 +9,40 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
   <div v-else class="flex flex-col w-full">
-    <template v-for="standing in teamStandings" :key="`${standing.Constructor.constructorId}-${standing.position}`">
-      <hr class="border-white"/>
+    <template
+      v-for="standing in teamStandings"
+      :key="`${standing.Constructor.constructorId}-${standing.position}`"
+    >
+      <hr class="border-gray-200" />
       <div
-          class="h-16 cursor-pointer grid grid-cols-[auto_auto_3fr_auto] gap-x-4 items-center justify-items-start hover:brightness-90"
-          :class="constructorIdTeamColor[standing.Constructor.constructorId].bg">
-          <span
-              class="w-12 h-full text-lg font-semibold flex items-center justify-center bg-black text-white">
-            {{ standing.position }}
-          </span>
-        <img class="w-12 h-12"
-             :src="constructorIdTeamLogo[standing.Constructor.constructorId]"/>
-        <div class="uppercase"
-             :class="constructorIdTeamColor[standing.Constructor.constructorId].text">
-          <span class="text font-black flex items-center leading-4">{{ standing.Constructor.name }}</span>
+        class="relative h-16 w-full grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90"
+      >
+        <span
+          class="w-14 text-lg font-semibold flex items-center justify-center"
+        >
+          {{ standing.position }}
+        </span>
+
+        <div class="flex items-center justify-center gap-5 h-full">
+          <div
+            class="w-2 h-2/3 py-2 rounded"
+            :class="constructorIdTeamColor[standing.Constructor.constructorId].bg"
+          />
+          <img
+            class="w-10 object-center object-contain"
+            :src="constructorIdTeamLogo[standing.Constructor.constructorId]"
+          />
         </div>
-        <div
-            class="h-full w-14 ml-auto text-lg font-mono flex items-center justify-center bg-red-700 text-white font-black">
-          {{ standing.points }}
+        <div class="flex flex-col ml-4">
+          <span class="font-bold">{{ standing.Constructor.name }}</span>
+        </div>
+        <div class="mr-4">
+          <div
+            class="w-16 rounded-lg py-05 text-lg font-mono flex gap-1 items-center justify-center bg-gray-200"
+          >
+            <span class="font-bold text-sm">{{ standing.points }}</span>
+            <span class="text-xs">{{ $t('global.pts') }}</span>
+          </div>
         </div>
       </div>
     </template>

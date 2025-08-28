@@ -10,14 +10,14 @@ import sauber from '@/assets/logos/sauber.svg'
 import rb from '@/assets/logos/rb.svg'
 
 export default {
-    mclaren,
-    red_bull,
-    mercedes,
-    ferrari,
-    aston_martin,
-    alpine,
-    haas,
-    williams,
-    sauber,
-    rb
+  mclaren,
+  red_bull,
+  mercedes,
+  ferrari,
+  aston_martin,
+  alpine,
+  haas,
+  williams,
+  sauber,
+  rb
 }

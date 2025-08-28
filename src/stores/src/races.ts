@@ -43,6 +43,6 @@ export const useRacesStore = defineStore('races', () => {
     fetchLoading,
     error,
     loadRaces: load,
-    getRaceByCircuitId,
+    getRaceByCircuitId
   }
 })

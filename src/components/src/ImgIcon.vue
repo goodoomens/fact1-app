@@ -28,5 +28,5 @@ const classMap = {
 
 <template>
   <img :class="[idImageMap[id] ? classMap[rounded || 'square'] : classMap['square'], sizeMap[size || 'md']]"
-       :src="idImageMap[id] || idImageMap['default']" :alt="description"/>
+       :src="idImageMap[id] || idImageMap['default']" :alt="description" />
 </template>

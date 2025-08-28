@@ -25,6 +25,6 @@ export const useDriverStandingsStore = defineStore('driverStandings', () => {
     isLoaded,
     fetchLoading,
     error,
-    loadDriverStandings: load,
+    loadDriverStandings: load
   }
 })

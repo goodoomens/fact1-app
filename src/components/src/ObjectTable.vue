@@ -8,7 +8,7 @@ const columnsMap = {
   '1/3': 'grid-cols-[1fr_3fr]',
   '3/1': 'grid-cols-[3fr_1fr]',
   '2/3': 'grid-cols-[2fr_2fr]',
-  '3/2': 'grid-cols-[2fr_3fr]',
+  '3/2': 'grid-cols-[2fr_3fr]'
 }
 
 const props = defineProps<{

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { pickBy } from 'lodash'
 import useApp from '@/composables/useRouting'
 import useTime from '@/composables/useTime'
@@ -11,7 +11,7 @@ import {
   circuitIdTrack,
   circuitIdTrackDetails,
   degradationColorClasses,
-  scheduleColorClasses,
+  scheduleColorClasses
 } from '@/mappings'
 import { ImgIcon, ObjectTable } from '@/components'
 import { Degradation } from '@/models'
@@ -21,9 +21,6 @@ import brake_icon from '@/assets/icons/brake.png'
 const { locale } = useI18n()
 const { format: formatTime } = useTime(locale.value as 'de' | 'en')
 const { getRaceByCircuitId, nextRace, loadRaces } = useRacesStore()
-
-// Ensure races are loaded
-loadRaces()
 
 const { getParameter, goTo } = useApp()
 const circuitId = getParameter('circuitId')
@@ -46,7 +43,7 @@ const detailsDisplay = computed((): Record<string, string> => {
     length: `${(length / 1000).toFixed(2)} km`,
     distance: `${((length * laps) / 1000).toFixed(2)} km`,
     brakeDeg: details.value.brakeDeg,
-    tireDeg: details.value.tireDeg,
+    tireDeg: details.value.tireDeg
   }
 })
 
@@ -59,7 +56,7 @@ const schedulDisplay = computed((): Record<string, string> => {
     SecondPractice: fp2,
     ThirdPractice: fp3,
     Sprint: s,
-    Qualifying: q,
+    Qualifying: q
   } = race
 
   const formatOptions = { long: true, weekdayShort: true }
@@ -71,7 +68,7 @@ const schedulDisplay = computed((): Record<string, string> => {
     thirdPractice: fp3 && formatTime(fp3.date, fp3.time, formatOptions),
     sprintRace: s && formatTime(s.date, s.time, formatOptions),
     qualifying: q && formatTime(q.date, q.time, formatOptions),
-    race: formatTime(race.date, race.time, formatOptions),
+    race: formatTime(race.date, race.time, formatOptions)
   }) as Record<string, string>
 })
 
@@ -80,8 +77,10 @@ const getBgClass = (degradation: Degradation) =>
 
 const detailIconMap = {
   tireDeg: tire_icon,
-  brakeDeg: brake_icon,
+  brakeDeg: brake_icon
 }
+
+onMounted(loadRaces)
 </script>
 
 <template>
@@ -93,13 +92,13 @@ const detailIconMap = {
       class="m-2"
       size="small"
       variant="text"
-      label="Back to calendar"
+      :label="$t('actions.backToCalendar')"
       icon="pi pi-chevron-left"
       @click="goTo('calendar')"
     />
     <div class="bg-white grid grid-cols-1 w-full">
       <div
-        class="h-48 sm:h-64 md:h-88 bg-center bg-cover flex flex-col gap-4 items-start justify-end p-6"
+        class="h-48 sm:h-64 md:h-88 bg-bottom bg-cover flex flex-col gap-4 items-start justify-end p-6"
         :style="{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.0)), url(${image})`,
         }"
@@ -113,7 +112,7 @@ const detailIconMap = {
         <div class="flex flex-col gap-1">
           <span
             class="text-2xl font-bold text-white leading-6 text-shadow-lg"
-            >{{ race.raceName }}</span
+          >{{ race.raceName }}</span
           >
           <span class="text-xs uppercase text-white text-shadow-lg">
             {{ race.Circuit.Location.country }} &bull;
@@ -121,8 +120,8 @@ const detailIconMap = {
           </span>
         </div>
         <span
-          class="bg-[rgba(0,0,0,0.6)] text-white text-xs px-2 py-1 rounded text-shadow-lg"
-          >{{
+          class="text-white text-xs text-shadow-lg"
+        >{{
             formatTime(race.date, race.time, { long: true, dateOnly: true })
           }}</span
         >
@@ -149,13 +148,6 @@ const detailIconMap = {
           </template>
         </ObjectTable>
 
-        <div
-          v-if="circuitIdTrack[circuitId]"
-          class="p-4 flex items-center justify-center"
-        >
-          <img class="w-2/3 sm:w-full" :src="circuitIdTrack[circuitId]" />
-        </div>
-
         <ObjectTable
           :title="$t('global.schedule')"
           :items="schedulDisplay"
@@ -174,6 +166,13 @@ const detailIconMap = {
             <span class="text-xs tracking-tight font-mono">{{ value }}</span>
           </template>
         </ObjectTable>
+
+        <div
+          v-if="circuitIdTrack[circuitId]"
+          class="p-4 flex items-center justify-center"
+        >
+          <img class="w-2/3 sm:w-full" :src="circuitIdTrack[circuitId]" />
+        </div>
       </div>
     </div>
   </div>

@@ -25,6 +25,6 @@ export const useTeamStandingsStore = defineStore('teamStandings', () => {
     isLoaded,
     fetchLoading,
     error,
-    loadTeamStandings: load,
+    loadTeamStandings: load
   }
 })

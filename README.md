@@ -16,8 +16,6 @@ A modern, responsive Formula 1 application built with Vue 3 that provides real-t
 
 ## 📋 Upcoming Features (TODO)
 
-- **🏆 Team Standings Redesign** - Update team standings to fit the overall design
-- **🖼️ Missing Assets** - Add missing circuit SVGs and circuit banners
 - **⚙️ Settings Tab** - Customize language, units, and display mode (light/dark)
 - **👤 Driver Detail Pages** - Individual driver profiles and statistics
 - **🏁 Race Results** - Show top 3 results for past races

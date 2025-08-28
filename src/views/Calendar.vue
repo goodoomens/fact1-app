@@ -17,7 +17,11 @@ const { locale } = useI18n()
 const { format: formatTime } = useTime(locale.value as 'de' | 'en')
 
 const { races, isLoaded } = storeToRefs(useRacesStore())
-const hidePastRaces = ref(false)
+const hidePastRaces = ref(JSON.parse(localStorage.getItem('hidePastRaces') ?? 'false'))
+const toggleHidePastRaces = () => {
+  hidePastRaces.value = !hidePastRaces.value
+  localStorage.setItem('hidePastRaces', String(hidePastRaces.value))
+}
 
 const nextRace = computed(() => races.value?.find(isUpcomingRace))
 const isUpcomingRace = (race: Race) => {
@@ -46,9 +50,9 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
       <Button
         size="small"
         variant="text"
-        :label="`${hidePastRaces ? 'Show' : 'Hide'} past races`"
+        :label="hidePastRaces ? $t('actions.showPastRaces') : $t('actions.hidePastRaces')"
         :icon="`pi ${hidePastRaces ? 'pi-eye' : 'pi-eye-slash'}`"
-        @click="hidePastRaces = !hidePastRaces"
+        @click="toggleHidePastRaces"
       />
     </div>
 
@@ -70,15 +74,16 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
           />
         </template>
         <template #subtitle
-          >{{ race.Circuit.Location.country }} &bull;
-          {{ race.Circuit.Location.locality }}</template
+        >{{ race.Circuit.Location.country }} &bull;
+          {{ race.Circuit.Location.locality }}
+        </template
         >
         <template #title>{{ race.raceName }}</template>
         <template #date v-if="isUpcomingRace(race)"
-          >{{
+        >{{
             formatTime(race.date, race.time, {
               dateOnly: true,
-              monthLong: true,
+              monthLong: true
             })
           }}
         </template>
