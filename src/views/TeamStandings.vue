@@ -13,9 +13,9 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
       v-for="standing in teamStandings"
       :key="`${standing.Constructor.constructorId}-${standing.position}`"
     >
-      <hr class="border-gray-200" />
+      <hr class="border-neutral-200 dark:border-neutral-900" />
       <div
-        class="relative h-16 w-full grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90"
+        class="relative h-16 w-full grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
       >
         <span
           class="w-14 text-lg font-semibold flex items-center justify-center"
@@ -38,7 +38,7 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
         </div>
         <div class="mr-4">
           <div
-            class="w-16 rounded-lg py-05 text-lg font-mono flex gap-1 items-center justify-center bg-gray-200"
+            class="w-16 rounded-lg py-05 text-lg font-mono flex gap-1 items-center justify-center bg-neutral-200 dark:bg-neutral-900"
           >
             <span class="font-bold text-sm">{{ standing.points }}</span>
             <span class="text-xs">{{ $t('global.pts') }}</span>

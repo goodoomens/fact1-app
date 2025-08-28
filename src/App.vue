@@ -25,7 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-gray-100 h-dvh flex flex-col relative">
+  <div class="bg-neutral-100 dark:bg-neutral-900 h-dvh flex flex-col relative">
 
     <Overlay />
 
@@ -50,7 +50,7 @@ onMounted(() => {
       />
     </div>
     <router-view
-      class="bg-white shadow-lg mx-auto max-w-3xl overflow-y-scroll"
+      class="bg-white dark:bg-neutral-800 shadow-lg mx-auto max-w-3xl overflow-y-scroll"
     />
   </div>
 </template>

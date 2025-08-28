@@ -39,20 +39,20 @@ const setLanguage = (lang: string) => {
 </script>
 
 <template>
-  <div class="bg-[rgba(255,255,255,0.8)] backdrop-blur-md absolute left-0 w-full">
+  <div class="bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(0,0,0,0.8)] backdrop-blur-md absolute left-0 w-full">
     <div
       v-if="model"
       class="mx-auto max-w-3xl flex flex-col items-start w-full h-screen"
     >
       <template v-for="route in routes" :key="route.name">
         <router-link
-          class="text-md text-gray-900 font-medium px-8 py-5 flex items-center gap-5 w-full hover:bg-[rgba(0,0,0,0.1)] transition-all"
+          class="text-md text-neutral-900 dark:text-white font-medium px-8 py-5 flex items-center gap-5 w-full hover:bg-[rgba(0,0,0,0.1)] transition-all"
           :to="route.path" @click="model = !model"
         >
           <i :class="route.icon" />
           {{ $t(route.labelKey) }}
         </router-link>
-        <hr class="w-full border-gray-900" />
+        <hr class="w-full border-neutral-300 dark:border-neutral-800" />
       </template>
       <div class="flex justify-end gap-5 w-full p-5">
         <template v-for="language in languages" :key="language.locale">

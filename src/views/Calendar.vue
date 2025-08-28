@@ -46,7 +46,7 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
   <div v-else class="flex flex-col w-full">
-    <div class="bg-white flex justify-end p-2">
+    <div class="flex justify-end p-2">
       <Button
         size="small"
         variant="text"
@@ -60,7 +60,7 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
       v-for="race in hidePastRaces ? races?.filter(isUpcomingRace) : races"
       :key="race.Circuit.circuitId"
     >
-      <hr class="border-gray-200" />
+      <hr class="border-neutral-200 dark:border-neutral-900" />
       <RaceCalendarCard @click="onRaceClick(race.Circuit.circuitId)">
         <template #tag v-if="race === nextRace">
           <RoundTag :label="raceIsToday(race) ? 'today' : 'next'" />

@@ -23,12 +23,12 @@ const getLatestConstructorId = (standing: DriverStanding) => {
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
   <div v-else class="flex flex-col w-full">
     <template
-      v-for="standing in driverStandings"
+      v-for="(standing, idx) in driverStandings"
       :key="standing.Driver.driverId"
     >
-      <hr class="border-gray-200" />
+      <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
       <div
-        class="relative h-16 w-full cursor grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90"
+        class="relative h-16 w-full cursor grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
       >
         <span
           class="w-14 text-lg font-semibold flex items-center justify-center"
@@ -62,7 +62,7 @@ const getLatestConstructorId = (standing: DriverStanding) => {
         </div>
         <div class="mr-4">
           <div
-            class="w-16 rounded-lg py-05 text-lg font-mono flex gap-1 items-center justify-center bg-gray-200"
+            class="w-16 rounded-lg py-05 text-lg font-mono flex gap-1 items-center justify-center bg-neutral-200 dark:bg-neutral-900"
           >
             <span class="font-bold text-sm">{{ standing.points }}</span>
             <span class="text-xs">{{ $t('global.pts') }}</span>

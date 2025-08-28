@@ -85,9 +85,9 @@ onMounted(loadRaces)
 
 <template>
   <div v-if="!race" class="flex items-center justify-center h-64">
-    <span class="text-gray-500">Race not found</span>
+    <span class="text-neutral-500">Race not found</span>
   </div>
-  <div v-else class="bg-gray-100 w-full h-full flex flex-col items-start">
+  <div v-else class="w-full h-full flex flex-col items-start">
     <Button
       class="m-2"
       size="small"
@@ -96,7 +96,7 @@ onMounted(loadRaces)
       icon="pi pi-chevron-left"
       @click="goTo('calendar')"
     />
-    <div class="bg-white grid grid-cols-1 w-full">
+    <div class="bg-white dark:bg-neutral-800 grid grid-cols-1 w-full">
       <div
         class="h-48 sm:h-64 md:h-88 bg-bottom bg-cover flex flex-col gap-4 items-start justify-end p-6"
         :style="{
@@ -169,7 +169,7 @@ onMounted(loadRaces)
 
         <div
           v-if="circuitIdTrack[circuitId]"
-          class="p-4 flex items-center justify-center"
+          class="p-4 flex items-center justify-center dark:invert"
         >
           <img class="w-2/3 sm:w-full" :src="circuitIdTrack[circuitId]" />
         </div>

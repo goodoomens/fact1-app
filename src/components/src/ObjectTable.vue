@@ -22,9 +22,9 @@ const isLastEntry = (idx: number) =>
 </script>
 
 <template>
-  <div class="outline outline-gray-200 rounded-lg overflow-hidden">
+  <div class="outline outline-neutral-200 dark:outline-neutral-900 rounded-lg overflow-hidden">
     <div
-      class="px-3 py-2 uppercase font-bold text-center text-xs bg-gray-100 tracking-wider"
+      class="px-3 py-2 uppercase font-bold text-center text-xs bg-neutral-100 dark:bg-neutral-900 tracking-wider"
     >
       {{ title }}
     </div>
@@ -41,7 +41,7 @@ const isLastEntry = (idx: number) =>
           <slot v-if="$slots.value" name="value" :props="{ key, value }" />
           <span v-else>{{ value }}</span>
         </span>
-        <hr v-if="!isLastEntry(idx)" class="col-span-2 border-gray-300" />
+        <hr v-if="!isLastEntry(idx)" class="col-span-2 border-neutral-300 dark:border-neutral-900" />
       </template>
     </div>
   </div>
