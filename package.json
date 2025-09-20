@@ -10,7 +10,10 @@
     "dev": "vite",
     "build": "vite build",
     "build:check": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test && vitest",
+    "test:run": "vitest run",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@primeuix/styles": "^1.2.3",
@@ -27,15 +30,22 @@
     "vue-router": "4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@types/estree": "^1.0.8",
     "@types/lodash": "^4.17.20",
     "@types/node": "^24.1.0",
     "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "estree-walker": "^3.0.3",
+    "jsdom": "^25.0.1",
     "source-map-js": "^1.2.1",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
+    "vitest": "^2.1.5",
     "vue-tsc": "^2.2.8"
+  },
+  "resolutions": {
+    "@playwright/test": "1.55.0"
   }
 }

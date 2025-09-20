@@ -20,7 +20,7 @@ const API_URLS = {
 }
 
 export default () => {
-  const fetchLoading = ref()
+  const fetchLoading = ref(false)
 
   const fetchData = async (key: FetchKey) => {
     fetchLoading.value = true

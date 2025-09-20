@@ -20,7 +20,7 @@ const getLatestConstructorId = (standing: DriverStanding) => {
 </script>
 
 <template>
-  <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
+  <ProgressBar v-if="!isLoaded" mode="indeterminate" data-ident="progress"></ProgressBar>
   <div v-else class="flex flex-col w-full">
     <template
       v-for="(standing, idx) in driverStandings"

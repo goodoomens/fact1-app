@@ -39,7 +39,7 @@ const setLanguage = (lang: string) => {
 </script>
 
 <template>
-  <div class="bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(0,0,0,0.8)] backdrop-blur-md absolute left-0 w-full">
+  <div class="bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(0,0,0,0.8)] backdrop-blur-md absolute left-0 w-full" data-ident="menu">
     <div
       v-if="model"
       class="mx-auto max-w-3xl flex flex-col items-start w-full h-screen"

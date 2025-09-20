@@ -6,7 +6,9 @@ const model = defineModel()
 
 <template>
   <div @click="model = !model"
-       class="cursor-pointer relative flex items-center justify-center p-2 text-white">
+       class="cursor-pointer relative flex items-center justify-center p-2 text-white"
+       data-ident="menu-button"
+  >
     <i
       class="pi pi-minus absolute transition-all duration-200 ease-in-out "
       style="font-size: 1.5rem"

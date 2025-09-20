@@ -15,9 +15,12 @@ const closeDialog = () => {
 <template>
   <div v-if="dialogOpen"
        class="absolute w-full h-full bg-[rgba(0,0,0,0.5)] dark:bg-[rgba(0,0,0,0.8)] shadow-lg z-50 p-6 flex justify-center items-center"
-       @click="closeDialog">
-    <div class="bg-white dark:bg-neutral-800 p-10 rounded-lg max-w-xl flex flex-col gap- outline-2 outline-white dark:outline-neutral-900 outline-offset-4"
-         @click.stop>
+       @click="closeDialog"
+       data-ident="overlay"
+  >
+    <div
+      class="bg-white dark:bg-neutral-800 p-10 rounded-lg max-w-xl flex flex-col gap- outline-2 outline-white dark:outline-neutral-900 outline-offset-4"
+      @click.stop>
       <div class="flex flex-col items-center gap-5">
         <div class="text-5xl text-center">🏎️💨</div>
         <h1 class="font-semibold text-center">{{ $t('initial.welcome') }}</h1>
@@ -27,7 +30,7 @@ const closeDialog = () => {
             <Checkbox v-model="dontShowDialogAgain" inputId="dontShowAgain" binary />
             <label class="select-none" for="dontShowAgain">{{ $t('initial.dontShowAgain') }}</label>
           </div>
-          <Button class="w-full my-2" @click="closeDialog">
+          <Button class="w-full my-2" @click="closeDialog" data-ident="confirm-disclaimer-button">
             Keep pushing!
           </Button>
         </div>
