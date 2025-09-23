@@ -21,7 +21,7 @@ onClickOutside(dialog, close)
 <template>
   <div ref="dialog" class="relative flex flex-col z-50" :class="{ 'items-end': end }">
     <slot name="activator" :toggle="toggle" />
-    <transition mode="out-in">
+    <transition name="modal" mode="out-in">
       <div
         v-if="isOpen"
         class="min-w-max absolute top-full bg-white dark:bg-neutral-800 p-5 rounded shadow-xl"
@@ -35,13 +35,13 @@ onClickOutside(dialog, close)
 </template>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
+.modal-enter-active,
+.modal-leave-active {
   transition: all 0.2s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.modal-enter-from,
+.modal-leave-to {
   opacity: 0;
   transform: translateY(-1rem);
 }
