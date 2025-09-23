@@ -9,43 +9,49 @@ export const routes = [
   {
     path: '/',
     name: 'calendar',
-    component: Calendar,
-    labelKey: 'global.calendar',
-    icon: 'pi pi-calendar'
+    component: Calendar
   },
   {
     path: '/race/:circuitId',
     name: 'race',
-    component: Race,
-    labelKey: 'global.race',
-    icon: 'pi pi-flag'
+    component: Race
   },
   {
     path: '/driver-standings',
     name: 'driverStandings',
-    component: DriverStandings,
-    labelKey: 'global.driverStandings',
-    icon: 'pi pi-trophy'
+    component: DriverStandings
   },
   {
     path: '/team-standings',
     name: 'teamStandings',
-    component: TeamStandings,
-    labelKey: 'global.teamStandings',
-    icon: 'pi pi-trophy'
+    component: TeamStandings
   }
   // {
   //   path: '/dashboard',
   //   name: 'dashboard',
   //   component: Dashboard,
-  //   labelKey: 'global.dashboard',
-  //   icon: 'pi pi-home'
   // },
   // {
   //   path: '/settings',
   //   name: 'settings',
   //   component: Settings,
-  //   labelKey: 'global.settings',
-  //   icon: 'pi pi-cog'
   // }
+]
+
+export const navigationItems = [
+  {
+    routeName: 'calendar',
+    labelKey: 'global.calendar',
+    icon: 'pi pi-calendar'
+  },
+  {
+    routeName: 'driverStandings',
+    labelKey: 'global.driverStandings',
+    icon: 'pi pi-trophy'
+  },
+  {
+    routeName: 'teamStandings',
+    labelKey: 'global.teamStandings',
+    icon: 'pi pi-trophy'
+  }
 ]

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import useFetchData from '@/composables/useFetchData'
+import useFetchData from '@/composables/src/useFetchData.ts'
 
 import { Race } from '@/types/src/race'
 

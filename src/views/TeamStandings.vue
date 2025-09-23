@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTeamStandingsStore } from '@/stores'
 import { storeToRefs } from 'pinia'
+import { useTeamStandingsStore } from '@/stores'
 import { constructorIdTeamColor, constructorIdTeamLogo } from '@/mappings'
 
 const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
@@ -8,14 +8,14 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
 
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate" data-ident="progress"></ProgressBar>
-  <div v-else class="flex flex-col w-full">
+  <div v-else class="flex flex-col w-full h-full">
     <template
-      v-for="standing in teamStandings"
+      v-for="(standing, idx) in teamStandings"
       :key="`${standing.Constructor.constructorId}-${standing.position}`"
     >
-      <hr class="border-neutral-200 dark:border-neutral-900" />
+      <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
       <div
-        class="relative h-16 w-full grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
+        class="shrink-0 relative h-16 w-full grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
       >
         <span
           class="w-14 text-lg font-semibold flex items-center justify-center"

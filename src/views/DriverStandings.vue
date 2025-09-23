@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useDriverStandingsStore } from '@/stores'
 import { storeToRefs } from 'pinia'
+import { useDriverStandingsStore } from '@/stores'
 import {
   driverCodePhoto,
   constructorIdTeamColor,
@@ -10,6 +10,7 @@ import { DriverStanding } from '@/types'
 
 const { driverStandings, isLoaded } = storeToRefs(useDriverStandingsStore())
 
+// Some drivers have multiple constructors
 const getLatestConstructorId = (standing: DriverStanding) => {
   const length = standing.Constructors.length
   if (length > 1) {
@@ -21,7 +22,7 @@ const getLatestConstructorId = (standing: DriverStanding) => {
 
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate" data-ident="progress"></ProgressBar>
-  <div v-else class="flex flex-col w-full">
+  <div v-else class="flex flex-col w-full h-full">
     <template
       v-for="(standing, idx) in driverStandings"
       :key="standing.Driver.driverId"
@@ -38,9 +39,7 @@ const getLatestConstructorId = (standing: DriverStanding) => {
         <div class="p-1 h-16 aspect-square">
           <div
             class="overflow-hidden rounded-full"
-            :class="
-              constructorIdTeamColor[getLatestConstructorId(standing)]?.bg
-            "
+            :class="constructorIdTeamColor[getLatestConstructorId(standing)]?.bg"
           >
             <img
               class="h-full w-full object-center object-contain"

@@ -9,7 +9,7 @@ vi.mock('vue-router', () => {
   }
 })
 
-import useRouting from '../../src/composables/useRouting'
+import useRouting from '../../src/composables/src/useRouting'
 
 describe('useRouting composable', () => {
   beforeEach(() => {

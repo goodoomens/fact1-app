@@ -6,11 +6,13 @@ export default () => {
 
   const getParameter = (param: string): string => String(route.params[param])
   const goTo = (routeName: string, params = {}) => router.push({ name: routeName, params: { ...params } })
+  const isActive = (routeName: string) => route.name === routeName
 
   return {
     route,
     router,
     getParameter,
-    goTo
+    goTo,
+    isActive
   }
 }

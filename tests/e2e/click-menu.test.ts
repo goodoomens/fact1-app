@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('click menu', async ({ page }) => {
+test('click menu (mobile) or verify no menu overlay (desktop)', async ({ page }) => {
   await page.goto('/')
 
   const button = page.locator('[data-ident="confirm-disclaimer-button"]')
@@ -10,8 +10,12 @@ test('click menu', async ({ page }) => {
   await expect(overlay).not.toBeVisible()
 
   const menuButton = page.locator('[data-ident="menu-button"]')
-  await menuButton.click()
-
   const menu = page.locator('[data-ident="menu"]')
-  await expect(menu).toBeVisible()
+
+  if (await menuButton.count() > 0 && await menuButton.first().isVisible()) {
+    await menuButton.click()
+    await expect(menu).toBeVisible()
+  } else {
+    await expect(menu).toHaveCount(0)
+  }
 })

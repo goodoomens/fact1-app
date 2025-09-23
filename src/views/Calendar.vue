@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import useApp from '@/composables/useRouting'
-import useTime from '@/composables/useTime'
+import { ref, computed, useTemplateRef } from 'vue'
+import { useScroll } from '@vueuse/core'
+import { useRouting, useTime } from '@/composables'
 import { useRacesStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { circuitIdFlag, scheduleColorClasses } from '@/mappings'
@@ -11,7 +11,7 @@ import chequered_flag_icon from '@/assets/icons/chequered-flag.svg'
 
 import type { Race } from '@/types'
 
-const { goTo } = useApp()
+const { goTo } = useRouting()
 const { locale } = useI18n()
 
 const { format: formatTime } = useTime(locale.value as 'de' | 'en')
@@ -41,12 +41,17 @@ const raceIsToday = (race: Race) => {
 }
 
 const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
+
+const container = useTemplateRef<HTMLElement>('container')
+const { arrivedState } = useScroll(container)
 </script>
 
 <template>
+
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
-  <div v-else class="flex flex-col w-full h-full">
-    <div class="flex justify-end p-2">
+  <div v-else class="flex flex-col w-full h-full" ref="container">
+    <div class="flex justify-end p-2 sticky top-0 z-10 bg-white dark:bg-neutral-800 transition-shadow"
+         :class="{ 'shadow-xl': !arrivedState.top }">
       <Button
         size="small"
         variant="text"
@@ -73,14 +78,14 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
             size="lg"
           />
         </template>
-        <template #subtitle
-        >{{ race.Circuit.Location.country }} &bull;
+        <template #subtitle>
+          {{ race.Circuit.Location.country }}
+          &bull;
           {{ race.Circuit.Location.locality }}
-        </template
-        >
+        </template>
         <template #title>{{ race.raceName }}</template>
-        <template #date v-if="isUpcomingRace(race)"
-        >{{
+        <template #date v-if="isUpcomingRace(race)">
+          {{
             formatTime(race.date, race.time, {
               dateOnly: true,
               monthLong: true

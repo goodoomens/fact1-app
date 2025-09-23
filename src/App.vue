@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { routes } from '@/router'
-import {
-  useRacesStore,
-  useDriverStandingsStore,
-  useTeamStandingsStore
-} from '@/stores'
-
-import { Menu, MenuButton } from '@/components'
-import Overlay from '@/views/Overlay.vue'
-
-import fact1_logo from '@/assets/fact1_logo.svg'
+import { onMounted } from 'vue'
+import { useBreakpoints, breakpointsTailwind } from '@vueuse/core'
+import { useRacesStore, useDriverStandingsStore, useTeamStandingsStore } from '@/stores'
 
 const { loadRaces } = useRacesStore()
 const { loadDriverStandings } = useDriverStandingsStore()
 const { loadTeamStandings } = useTeamStandingsStore()
-const menuIsOpen = ref(false)
 
+import DesktopLayout from '@/layouts/DesktopLayout.vue'
+import MobileLayout from '@/layouts/MobileLayout.vue'
+import Dialog from '@/views/Dialog.vue'
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isDesktop = breakpoints.greater('md')
 onMounted(() => {
   loadRaces()
   loadDriverStandings()
@@ -26,31 +22,12 @@ onMounted(() => {
 
 <template>
   <div class="bg-neutral-100 dark:bg-neutral-900 h-dvh flex flex-col relative">
-
-    <Overlay />
-
-    <div class="sticky top-0 z-20">
-      <div
-        class="bg-gradient-to-r from-red-500 to-red-800 shadow-md z-10 flex justify-center"
-      >
-        <div
-          class="w-full max-w-3xl flex items-center justify-between px-5 py-3"
-        >
-          <MenuButton v-model="menuIsOpen" />
-          <div class="flex flex-col items-end text-white gap-2">
-            <!--<span class="text-2xl font-black leading-6">Fact1</span>-->
-            <img class="h-6" alt="Fact1" :src="fact1_logo" />
-            <span class="text-xs leading-2">{{ $t('global.season') }} 2025</span>
-          </div>
-        </div>
-      </div>
-      <Menu
-        v-model="menuIsOpen"
-        :routes="routes.filter((route) => route.name !== 'race')"
-      />
-    </div>
+    <Dialog />
+    <DesktopLayout v-if="isDesktop" />
+    <MobileLayout v-else />
     <router-view
-      class="bg-white dark:bg-neutral-800 shadow-lg mx-auto max-w-3xl overflow-y-scroll"
+      class="bg-white dark:bg-neutral-800 shadow-lg mx-auto max-w-3xl overflow-y-scroll overscroll-none"
+      :class="{ 'mt-10 rounded-t-lg': isDesktop }"
     />
   </div>
 </template>

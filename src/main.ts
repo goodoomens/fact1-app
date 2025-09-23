@@ -11,7 +11,7 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primeuix/themes/aura'
 import { definePreset } from '@primeuix/themes'
 
-import { Button, ProgressBar, Tag, Checkbox } from 'primevue'
+import { Button, ProgressBar, Checkbox, Tag } from 'primevue'
 
 import './style.css'
 
@@ -69,10 +69,11 @@ app.use(PrimeVue, {
   },
   ripple: true
 })
+
 app.component('Button', Button)
 app.component('ProgressBar', ProgressBar)
-app.component('Tag', Tag)
 app.component('Checkbox', Checkbox)
+app.component('Tag', Tag)
 app.use(pinia)
 app.use(router)
 app.use(i18n)

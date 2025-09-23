@@ -1,7 +1,7 @@
 export default {
   initial: {
     welcome: 'Welcome to Fact1!',
-    text: 'Glad to have you here! This app provides you with a clear overview of Formula 1, including race schedules and standings. Enjoy using the app!',
+    text: 'Glad to have you here! This app provides a clear overview of Formula 1, including race schedules and standings. Enjoy using the app!',
     disclaimer: 'Disclaimer: This app is a hobby project and is not operated commercially. All content is intended solely for private and informational use. All logos, images, or trademarks used belong to their respective owners. There is no claim to commercial use, and the app has no commercial intentions.',
     dontShowAgain: 'Dont show again'
   },
@@ -12,7 +12,9 @@ export default {
     season: 'Season',
     calendar: 'Calendar',
     driverStandings: 'Driver Standings',
-    teamStandings: 'Team Standings'
+    teamStandings: 'Team Standings',
+    language: 'Language',
+    units: 'Units'
   },
   actions: {
     hidePastRaces: 'Hide past races',

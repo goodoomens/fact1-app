@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import useFetchData from '@/composables/useFetchData'
+import useFetchData from '@/composables/src/useFetchData.ts'
 import { TeamStanding } from '@/types'
 
 export const useTeamStandingsStore = defineStore('teamStandings', () => {

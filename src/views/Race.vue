@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { pickBy } from 'lodash'
-import useApp from '@/composables/useRouting'
-import useTime from '@/composables/useTime'
+import { useRouting, useTime, useUnits } from '@/composables'
 import { useRacesStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
 import {
@@ -19,10 +18,11 @@ import tire_icon from '@/assets/icons/tire.png'
 import brake_icon from '@/assets/icons/brake.png'
 
 const { locale } = useI18n()
-const { format: formatTime } = useTime(locale.value as 'de' | 'en')
 const { getRaceByCircuitId, nextRace, loadRaces } = useRacesStore()
 
-const { getParameter, goTo } = useApp()
+const { calculate } = useUnits(locale)
+
+const { getParameter, goTo } = useRouting()
 const circuitId = getParameter('circuitId')
 const race = circuitId ? getRaceByCircuitId(circuitId) : nextRace
 const actualCircuitId = race?.Circuit?.circuitId || 'default'
@@ -33,6 +33,11 @@ const details = computed(
   () =>
     circuitIdTrackDetails[actualCircuitId] || circuitIdTrackDetails['default']
 )
+
+const formatTime = computed(() => {
+  const { format } = useTime(locale.value as 'de' | 'en' | 'nl')
+  return format
+})
 
 const detailsDisplay = computed((): Record<string, string> => {
   if (!race) return {}
@@ -59,16 +64,17 @@ const schedulDisplay = computed((): Record<string, string> => {
     Qualifying: q
   } = race
 
+  const format = formatTime.value
   const formatOptions = { long: true, weekdayShort: true }
 
   return pickBy({
-    firstPractice: fp1 && formatTime(fp1.date, fp1.time, formatOptions),
-    sprintQualifying: sq && formatTime(sq.date, sq.time, formatOptions),
-    secondPractice: fp2 && formatTime(fp2.date, fp2.time, formatOptions),
-    thirdPractice: fp3 && formatTime(fp3.date, fp3.time, formatOptions),
-    sprintRace: s && formatTime(s.date, s.time, formatOptions),
-    qualifying: q && formatTime(q.date, q.time, formatOptions),
-    race: formatTime(race.date, race.time, formatOptions)
+    firstPractice: fp1 && format(fp1.date, fp1.time, formatOptions),
+    sprintQualifying: sq && format(sq.date, sq.time, formatOptions),
+    secondPractice: fp2 && format(fp2.date, fp2.time, formatOptions),
+    thirdPractice: fp3 && format(fp3.date, fp3.time, formatOptions),
+    sprintRace: s && format(s.date, s.time, formatOptions),
+    qualifying: q && format(q.date, q.time, formatOptions),
+    race: format(race.date, race.time, formatOptions)
   }) as Record<string, string>
 })
 
@@ -79,6 +85,8 @@ const detailIconMap = {
   tireDeg: tire_icon,
   brakeDeg: brake_icon
 }
+
+const isNumber = (value: string) => !isNaN(parseFloat(value))
 
 onMounted(loadRaces)
 </script>
@@ -111,10 +119,9 @@ onMounted(loadRaces)
           rounded="circle"
         />
         <div class="flex flex-col gap-1">
-          <span
-            class="text-2xl font-bold text-white leading-6 text-shadow-lg"
-          >{{ race.raceName }}</span
-          >
+          <span class="text-2xl font-bold text-white leading-6 text-shadow-lg">
+            {{ race.raceName }}
+          </span>
           <span class="text-xs uppercase text-white text-shadow-lg">
             {{ race.Circuit.Location.country }} &bull;
             {{ race.Circuit.Location.locality }}
@@ -129,26 +136,6 @@ onMounted(loadRaces)
       </div>
 
       <div class="grid sm:grid-cols-2 gap-4 p-4">
-        <ObjectTable
-          :title="$t('global.trackDetails')"
-          :items="detailsDisplay"
-          columns="2/3"
-        >
-          <template #key="{ props: { key } }">
-            <span>{{ $t(`details.${key}`) }}</span>
-          </template>
-          <template #value="{ props: { key, value } }">
-            <Tag
-              v-if="value in Degradation"
-              :class="[getBgClass(value as Degradation)]"
-            >
-              <img class="h-3" :src="detailIconMap[key]" />
-              {{ $t(`degradation.${value}`) }}
-            </Tag>
-            <span class="text-right" v-else>{{ value }}</span>
-          </template>
-        </ObjectTable>
-
         <ObjectTable
           :title="$t('global.schedule')"
           :items="schedulDisplay"
@@ -165,6 +152,26 @@ onMounted(loadRaces)
           </template>
           <template #value="{ props: { value } }">
             <span class="text-xs tracking-tight font-mono">{{ value }}</span>
+          </template>
+        </ObjectTable>
+
+        <ObjectTable
+          :title="$t('global.trackDetails')"
+          :items="detailsDisplay"
+          columns="2/3"
+        >
+          <template #key="{ props: { key } }">
+            <span>{{ $t(`details.${key}`) }}</span>
+          </template>
+          <template #value="{ props: { key, value } }">
+            <Tag
+              v-if="value in Degradation"
+              :class="[getBgClass(value as Degradation)]"
+            >
+              <img class="h-3" :src="detailIconMap[key]" />
+              {{ $t(`degradation.${value}`) }}
+            </Tag>
+            <span class="text-right" v-else>{{ isNumber(value) ? calculate(value) : value }}</span>
           </template>
         </ObjectTable>
 

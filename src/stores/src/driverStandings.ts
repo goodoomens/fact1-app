@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import useFetchData from '@/composables/useFetchData'
+import useFetchData from '@/composables/src/useFetchData.ts'
 import { DriverStanding } from '@/types'
 
 export const useDriverStandingsStore = defineStore('driverStandings', () => {

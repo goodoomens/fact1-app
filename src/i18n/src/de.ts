@@ -12,7 +12,9 @@ export default {
     season: 'Saison',
     calendar: 'Kalender',
     driverStandings: 'Fahrerwertung',
-    teamStandings: 'Konstrukteurswertung'
+    teamStandings: 'Konstrukteurswertung',
+    language: 'Sprache',
+    units: 'Einheiten'
   },
   actions: {
     hidePastRaces: 'Vergangene Rennen ausblenden',

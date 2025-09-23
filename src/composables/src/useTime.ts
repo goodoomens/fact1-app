@@ -1,6 +1,7 @@
 const localeMap = {
   'en': 'en-US',
-  'de': 'de-DE'
+  'de': 'de-DE',
+  'nl': 'nl-NL'
 }
 
 type Options = {
@@ -10,7 +11,7 @@ type Options = {
   dateOnly?: boolean
 }
 
-export default (locale: keyof typeof localeMap = 'en') => {
+export default (locale: string) => {
   const format = (date: string, time: string, options: Options = {
     long: false,
     weekdayShort: false,

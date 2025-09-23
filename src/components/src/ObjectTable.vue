@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const columnsMap = {
   '1/1': 'grid-cols-[1fr_1fr]',
   '1/2': 'grid-cols-[1fr_2fr]',

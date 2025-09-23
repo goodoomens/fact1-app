@@ -60,7 +60,7 @@ describe('TeamStandings.vue', () => {
 
     expect(wrapper.find('[data-ident="progress"]').exists()).toBe(false)
 
-    // Position, team name and points
+    // Content
     expect(wrapper.text()).toContain('1')
     expect(wrapper.text()).toContain('Mercedes')
     expect(wrapper.text()).toContain('321')
@@ -70,7 +70,7 @@ describe('TeamStandings.vue', () => {
     const colorBar = wrapper.find('div.w-2')
     expect(colorBar.classes()).toContain('bg-green-500')
 
-    // Team logo image used
+    // Team logo image
     const logo = wrapper.find('img.w-10')
     expect(logo.exists()).toBe(true)
     expect((logo.element as HTMLImageElement).getAttribute('src')).toBe('logo-mercedes.svg')

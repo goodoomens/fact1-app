@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import axios from 'axios'
-import useFetchData from '../../src/composables/useFetchData'
+import useFetchData from '../../src/composables/src/useFetchData'
 
 vi.mock('axios', () => ({
   default: {

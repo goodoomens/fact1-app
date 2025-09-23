@@ -1,11 +1,4 @@
-export enum Degradation {
-  unknown = 'unknown',
-  veryLow = 'veryLow',
-  low = 'low',
-  medium = 'medium',
-  high = 'high',
-  veryHigh = 'veryHigh'
-}
+import { Degradation } from './enums'
 
 export type TrackDetails = {
   length: number
@@ -13,3 +6,11 @@ export type TrackDetails = {
   tireDeg: Degradation
   brakeDeg: Degradation
 }
+
+export type NavigationItem = {
+  routeName: string,
+  labelKey: string,
+  icon: string,
+}
+
+export type Locale = 'de' | 'en' | 'nl'
