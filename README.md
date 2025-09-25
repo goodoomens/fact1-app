@@ -1,6 +1,6 @@
 # Fact1 - Formula 1 Race Tracker 🏁
 
-A modern, responsive Formula 1 application built with Vue 3 that provides real-time race information, driver standings, team standings, and race calendars.
+A modern, responsive Formula 1 application built with Vue 3 that provides a race calendar, driver standings, team standings and additional statistics.
 
 ## Live Demo
 [Fact1 on Netlify](https://fact1.netlify.app)
@@ -14,14 +14,11 @@ A modern, responsive Formula 1 application built with Vue 3 that provides real-t
 - **📱 Responsive Design** - Optimized for desktop and mobile devices
 - **🎨 Modern UI** - Built with Tailwind CSS and PrimeVue components
 
-## 📋 Upcoming Features (TODO)
+## 📋 ToDos
 
-- **⚙️ Settings Tab** - Customize language, units, and display mode (light/dark)
-- **👤 Driver Detail Pages** - Individual driver profiles and statistics
-- **🏁 Race Results** - Show top 3 results for past races
+- **👤 Driver Detail Pages** - Individual driver profiles
 - **🌤️ Weather Forecast** - Weather predictions for upcoming races
-- **⚖️ Driver Comparison** - Compare drivers per circuit performance
-- **💻 Desktop Enhancement** - Make the interface more visually appealing for desktop users
+- **💾 Improved Data Management** - BFF for data fetching and caching
 
 ## 🛠️ Tech Stack
 
@@ -34,6 +31,8 @@ A modern, responsive Formula 1 application built with Vue 3 that provides real-t
 - **HTTP Client**: Axios
 - **Routing**: Vue Router
 - **Internationalization**: Vue I18n
+- **Charts**: Highcharts
+- **Excel**: ExcelJS
 
 ## 🚀 Getting Started
 
@@ -96,14 +95,12 @@ src/
 - Interactive calendar showing all F1 races
 - Toggle to hide/show past races
 - Highlight upcoming and current race
-- Sprint race indicators
 
 ### Driver & Team Standings
 
-- Real-time championship standings
-- Driver photos and team branding
-- Constructor information and team colors
-- Points and position tracking
+- Championship standings
+- Constructor information
+- Points and positions
 
 ### Responsive Design
 
