@@ -11,21 +11,21 @@ type ApiEntry = {
 
 const API_URLS: Record<FetchKey, ApiEntry> = {
   races: {
-    url: 'https://api.jolpi.ca/ergast/f1/current',
+    url: 'https://api.jolpi.ca/ergast/f1/current/',
     path: 'MRData.RaceTable.Races'
   },
   driverStandings: {
-    url: 'https://api.jolpi.ca/ergast/f1/current/driverstandings',
+    url: 'https://api.jolpi.ca/ergast/f1/current/driverstandings/',
     path: 'MRData.StandingsTable.StandingsLists[0].DriverStandings'
   },
   teamStandings: {
-    url: 'https://api.jolpi.ca/ergast/f1/current/constructorstandings',
+    url: 'https://api.jolpi.ca/ergast/f1/current/constructorstandings/',
     path: 'MRData.StandingsTable.StandingsLists[0].ConstructorStandings'
   },
   results: {
     url: (round?: number) =>
       round
-        ? `https://api.jolpi.ca/ergast/f1/current/${round}/results`
+        ? `https://api.jolpi.ca/ergast/f1/current/${round}/results/`
         : 'https://api.jolpi.ca/ergast/f1/current/results',
     path: 'MRData.RaceTable.Races[0]'
   }

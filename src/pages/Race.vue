@@ -95,9 +95,9 @@ const isNumber = (value: string) => !isNaN(parseFloat(value))
 const result = computed(() => getCalendarResultByCircuitId(circuitId))
 
 const twOrderOutlinePosition = {
-  1: 'bg-yellow-50 border-yellow-400 order-1 sm:order-2',
-  2: 'bg-gray-50 border-gray-400 order-2 sm:order-1',
-  3: 'bg-orange-50 border-orange-600 order-3'
+  1: 'bg-yellow-50 dark:bg-yellow-900 border-yellow-400 order-1 sm:order-2',
+  2: 'bg-gray-50 dark:bg-gray-900 border-gray-400 order-2 sm:order-1',
+  3: 'bg-orange-50 dark:bg-orange-900 border-orange-600 order-3'
 }
 </script>
 

@@ -43,7 +43,7 @@ const driverIsSelected = (driver: any) => {
         size="small"
         variant="text"
         :disabled="driverIds.length === 0"
-        :label="$t('actions.showStatistics')"
+        :label="`${$t('actions.showStatistics')} ${driverIds.length > 0 ? `(${driverIds.length})` : ''}`"
         icon="pi pi-chart-line"
         @click="() => goTo('driverStatistics', { driverIds })"
       />
@@ -57,7 +57,7 @@ const driverIsSelected = (driver: any) => {
         <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
         <div
           class="relative h-16 w-full cursor-pointer grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
-          :class="driverIsSelected(standing) ? 'bg-neutral-100' : ''"
+          :class="driverIsSelected(standing) ? 'bg-neutral-200 dark:bg-neutral-900' : ''"
           @click="toggleDriver(standing)"
         >
         <span
