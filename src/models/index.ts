@@ -4,4 +4,5 @@ export * from './src/types/calendar.ts'
 export * from './src/types/details.ts'
 export * from './src/types/frontend.ts'
 export * from './src/types/transformed.ts'
+export * from './src/types/driver.ts'
 

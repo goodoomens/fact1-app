@@ -3,9 +3,9 @@ const model = defineModel()
 </script>
 
 <template>
-  <transition mode="out-in">
-    <div class="w-full h-full bg-[rgba(0,0,0,0.5)] absolute top-0 left-0" v-if="model" />
-  </transition>
+  <Transition mode="out-in">
+    <div class="w-full h-full bg-[rgba(0,0,0,0.5)] absolute top-0 left-0 z-20" v-if="model" />
+  </Transition>
 </template>
 
 <style scoped>

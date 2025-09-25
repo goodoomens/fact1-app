@@ -36,13 +36,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="bg-neutral-100 dark:bg-neutral-900 h-dvh flex flex-col relative">
+  <div class="relative bg-neutral-100 dark:bg-neutral-900 h-dvh flex flex-col" id="wrapper">
     <Dialog />
     <DesktopLayout v-if="isDesktop" />
     <MobileLayout v-else />
-    <router-view
-      class="bg-white dark:bg-neutral-800 shadow-lg mx-auto max-w-3xl overflow-y-scroll overscroll-none"
-      :class="{ 'mt-10 rounded-t-lg': isDesktop }"
-    />
+    <Transition>
+      <router-view
+        class="bg-white dark:bg-neutral-800 shadow-lg mx-auto max-w-3xl overflow-y-scroll overscroll-none"
+        :class="{ 'mt-10 rounded-t-lg': isDesktop }"
+      />
+    </Transition>
   </div>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

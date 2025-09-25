@@ -14,12 +14,19 @@ export default {
     driverStandings: 'Rijdersstand',
     teamStandings: 'Constructeursstand',
     language: 'Taal',
-    units: 'Eenheden'
+    units: 'Eenheden',
+    high: 'HIGH',
+    avg: 'AVG',
+    low: 'LOW'
   },
   actions: {
     hidePastRaces: 'Verberg afgelopen races',
     showPastRaces: 'Toon afgelopen races',
-    backToCalendar: 'Terug naar kalender'
+    backToCalendar: 'Terug naar kalender',
+    backToDriverStandings: 'Terug naar rijdersstand',
+    show: 'Bekijken',
+    compare: 'Vergelijken',
+    exportToExcel: 'Exporteer naar Excel'
   },
   details: {
     circuitName: 'Naam',

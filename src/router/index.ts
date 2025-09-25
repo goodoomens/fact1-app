@@ -2,6 +2,7 @@ import Calendar from '@/views/Calendar.vue'
 import Race from '@/views/Race.vue'
 import TeamStandings from '@/views/TeamStandings.vue'
 import DriverStandings from '@/views/DriverStandings.vue'
+import DriverStatistics from '@/views/DriverStatistics.vue'
 
 export const routes = [
   {
@@ -23,6 +24,14 @@ export const routes = [
     path: '/team-standings',
     name: 'teamStandings',
     component: TeamStandings
+  },
+  {
+    path: '/driver-statistics/:driverIds+',
+    name: 'driverStatistics',
+    component: DriverStatistics,
+    props: route => ({
+      driverIds: route.params.driverIds
+    })
   }
 ]
 

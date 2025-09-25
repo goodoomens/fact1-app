@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { pickBy } from 'lodash'
 import { useRouting, useTime, useUnits } from '@/composables'
+import { ContentToolbar } from '@/components'
 import { useRacesStore, useResultsStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
 import {
@@ -104,8 +105,8 @@ const twOrderOutlinePosition = {
   <div v-if="!race" class="flex items-center justify-center h-64">
     <span class="text-neutral-500">Race not found</span>
   </div>
-  <div v-else class="w-full h-full flex flex-col items-start">
-    <div class="p-2">
+  <ContentToolbar v-else>
+    <template #toolbar>
       <Button
         size="small"
         variant="text"
@@ -113,8 +114,8 @@ const twOrderOutlinePosition = {
         icon="pi pi-chevron-left"
         @click="goTo('calendar')"
       />
-    </div>
-    <div class="bg-white dark:bg-neutral-800 grid grid-cols-1 w-full">
+    </template>
+    <template #content>
       <div
         class="h-48 sm:h-64 md:h-88 bg-bottom bg-cover flex flex-col gap-4 items-start justify-end p-6"
         :style="{
@@ -216,6 +217,6 @@ const twOrderOutlinePosition = {
           <img class="w-2/3 sm:w-full" :src="circuitIdTrack[circuitId]" />
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </ContentToolbar>
 </template>

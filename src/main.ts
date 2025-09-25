@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { createI18n } from 'vue-i18n'
+import HighchartsVue from 'highcharts-vue'
 
 import i18nConfig from '@/i18n'
 
@@ -77,4 +78,5 @@ app.component('Tag', Tag)
 app.use(pinia)
 app.use(router)
 app.use(i18n)
+app.use(HighchartsVue)
 app.mount('#app')

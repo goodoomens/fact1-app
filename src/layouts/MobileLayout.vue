@@ -12,7 +12,7 @@ const menuIsOpen = ref(false)
 
 <template>
   <div class="sticky top-0 z-20">
-    <div class="bg-gradient-to-r from-red-500 to-red-800 shadow-md z-10 flex justify-center">
+    <div class="bg-gradient-to-r from-red-500 to-red-800 shadow-md z-20 flex justify-center">
       <div class="w-full max-w-3xl flex items-center justify-between px-5 py-3">
         <HamburgerButton v-model="menuIsOpen" />
         <div class="flex flex-col items-end text-white gap-2">

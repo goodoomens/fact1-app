@@ -21,7 +21,7 @@ onClickOutside(dialog, close)
 <template>
   <div ref="dialog" class="relative flex flex-col z-50" :class="{ 'items-end': end }">
     <slot name="activator" :toggle="toggle" />
-    <transition name="modal" mode="out-in">
+    <Transition name="modal" mode="out-in">
       <div
         v-if="isOpen"
         class="min-w-max absolute top-full bg-white dark:bg-neutral-800 p-5 rounded shadow-xl"
@@ -29,7 +29,7 @@ onClickOutside(dialog, close)
       >
         <slot />
       </div>
-    </transition>
+    </Transition>
   </div>
   <Overlay v-if="overlay" v-model="isOpen" />
 </template>

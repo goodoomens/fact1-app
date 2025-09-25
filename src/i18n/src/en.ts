@@ -14,12 +14,19 @@ export default {
     driverStandings: 'Driver Standings',
     teamStandings: 'Team Standings',
     language: 'Language',
-    units: 'Units'
+    units: 'Units',
+    high: 'HIGH',
+    avg: 'AVG',
+    low: 'LOW'
   },
   actions: {
     hidePastRaces: 'Hide past races',
     showPastRaces: 'Show past races',
-    backToCalendar: 'Back to calendar'
+    backToCalendar: 'Back to calendar',
+    backToDriverStandings: 'Back to driver standings',
+    show: 'Show',
+    compare: 'Compare',
+    exportToExcel: 'Export to Excel'
   },
   details: {
     circuitName: 'Name',

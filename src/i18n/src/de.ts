@@ -14,12 +14,19 @@ export default {
     driverStandings: 'Fahrerwertung',
     teamStandings: 'Konstrukteurswertung',
     language: 'Sprache',
-    units: 'Einheiten'
+    units: 'Einheiten',
+    high: 'HIGH',
+    avg: 'AVG',
+    low: 'LOW'
   },
   actions: {
     hidePastRaces: 'Vergangene Rennen ausblenden',
     showPastRaces: 'Vergangene Rennen anzeigen',
-    backToCalendar: 'Zurück zum Kalender'
+    backToCalendar: 'Zurück zum Kalender',
+    backToDriverStandings: 'Zurück zur Fahrerwertung',
+    show: 'Anzeigen',
+    compare: 'Vergleichen',
+    exportToExcel: 'Als Excel exportieren'
   },
   details: {
     circuitName: 'Name',

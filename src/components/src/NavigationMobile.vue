@@ -23,7 +23,7 @@ defineProps<{
           <i :class="item.icon" />
           {{ $t(item.labelKey) }}
         </router-link>
-        <hr class="w-full border-neutral-300 dark:border-neutral-800" />
+        <hr class="w-full border-neutral-400 dark:border-neutral-800" />
       </template>
       <slot name="append" />
     </div>

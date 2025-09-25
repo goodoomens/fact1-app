@@ -1,8 +1,8 @@
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetchData } from '@/composables'
 import { delay } from '@/utils'
-import type { Race, CalendarResult } from '@/models'
+import type { Race, CalendarResult, DriverResult } from '@/models'
 
 const STORE_KEY = 'results'
 
@@ -48,11 +48,41 @@ export const useResultsStore = defineStore(STORE_KEY, () => {
     return calendarResults.value.find(race => race.circuitId === circuitId)
   }
 
+  const getResultsByDriverId = (driverId: string): DriverResult[] => {
+    return results.value.flatMap(race => {
+      const result = race.Results.find(r => r.Driver.driverId === driverId)
+      if (!result) return []
+      return [{
+        round: race.round,
+        raceName: race.raceName,
+        circuitId: race.Circuit.circuitId,
+        country: race.Circuit.Location.country,
+        result
+      }]
+    })
+  }
+
+  const getPositionStatsByDriverId = (driverId: string) => {
+    const driverResults = getResultsByDriverId(driverId)
+    if (!driverResults.length) return { best: null, avg: null, worst: null }
+
+    const positions = driverResults.map(r => parseInt(r.result.position))
+    const sum = positions.reduce((acc, pos) => acc + pos, 0)
+
+    return {
+      best: Math.min(...positions),
+      avg: sum / positions.length,
+      worst: Math.max(...positions)
+    }
+  }
+
   return {
     loadResults: load,
     results,
     calendarResults,
     getCalendarResultByCircuitId,
+    getResultsByDriverId,
+    getPositionStatsByDriverId,
     isLoaded,
     fetchLoading,
     error
