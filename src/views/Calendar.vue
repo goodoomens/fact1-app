@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, useTemplateRef } from 'vue'
+import { ref, computed, useTemplateRef, onMounted } from 'vue'
 import { useScroll } from '@vueuse/core'
 import { useRouting, useTime } from '@/composables'
 import { useRacesStore } from '@/stores'
@@ -9,7 +9,7 @@ import { useI18n } from 'vue-i18n'
 import { ImgIcon, RaceCalendarCard, RoundTag, SmallTag } from '@/components'
 import chequered_flag_icon from '@/assets/icons/chequered-flag.svg'
 
-import type { Race } from '@/types'
+import type { RaceEvent } from '@/models'
 
 const { goTo } = useRouting()
 const { locale } = useI18n()
@@ -24,7 +24,7 @@ const toggleHidePastRaces = () => {
 }
 
 const nextRace = computed(() => races.value?.find(isUpcomingRace))
-const isUpcomingRace = (race: Race) => {
+const isUpcomingRace = (race: RaceEvent) => {
   const { date, time } = race
   const now = new Date()
   const raceDateTime = new Date(`${date}T${time}`)
@@ -33,8 +33,8 @@ const isUpcomingRace = (race: Race) => {
     raceDateTime < new Date(raceDateTime.getTime() + 24 * 60 * 60 * 1000)
   )
 }
-const isSprintRace = (race: Race) => !!race.Sprint
-const raceIsToday = (race: Race) => {
+const isSprintRace = (race: RaceEvent) => !!race.Sprint
+const raceIsToday = (race: RaceEvent) => {
   const now = new Date().toDateString()
   const raceDate = new Date(race.date).toDateString()
   return now === raceDate
@@ -47,7 +47,6 @@ const { arrivedState } = useScroll(container)
 </script>
 
 <template>
-
   <ProgressBar v-if="!isLoaded" mode="indeterminate"></ProgressBar>
   <div v-else class="flex flex-col w-full h-full" ref="container">
     <div class="flex justify-end p-2 sticky top-0 z-10 bg-white dark:bg-neutral-800 transition-shadow"

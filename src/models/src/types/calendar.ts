@@ -1,24 +1,16 @@
+import { Circuit } from './api.ts'
+
 export type Event = {
   date: string
   time: string
 }
 
-export type Race = {
+export type RaceEvent = {
   season: string
   round: string
   url: string
   raceName: string
-  Circuit: {
-    circuitId: string
-    url: string
-    circuitName: string
-    Location: {
-      lat: string
-      long: string
-      locality: string
-      country: string
-    }
-  }
+  Circuit: Circuit
   date: string
   time: string
   FirstPractice?: Event
@@ -28,5 +20,3 @@ export type Race = {
   Sprint?: Event
   SprintQualifying?: Event
 }
-
-export {}

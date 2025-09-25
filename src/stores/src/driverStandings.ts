@@ -1,23 +1,33 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import useFetchData from '@/composables/src/useFetchData.ts'
-import { DriverStanding } from '@/types'
+import { defineStore } from 'pinia'
+import { useFetchData } from '@/composables'
+import { DriverStanding } from '@/models'
 
-export const useDriverStandingsStore = defineStore('driverStandings', () => {
+const STORE_KEY = 'driverStandings'
+
+export default defineStore(STORE_KEY, () => {
   const driverStandings = ref<DriverStanding[]>([])
   const isLoaded = ref(false)
   const error = ref<Error | null>(null)
   const { fetchData, fetchLoading } = useFetchData()
 
-  async function load() {
+  const load = async () => {
     if (isLoaded.value || fetchLoading.value) return
     try {
-      driverStandings.value = await fetchData('driverStandings')
+      driverStandings.value = await fetchData(STORE_KEY)
       isLoaded.value = true
     } catch (err: any) {
       error.value = err
-      console.error('[!] Error loading driverStandings:', err)
+      console.error(`[!] Error loading ${STORE_KEY}:`, err)
     }
+  }
+
+  const getLatestConstructorId = (standing: DriverStanding) => {
+    const length = standing.Constructors.length
+    if (length > 1) {
+      return standing.Constructors[length - 1]?.constructorId
+    }
+    return standing.Constructors[0]?.constructorId
   }
 
   return {
@@ -25,6 +35,7 @@ export const useDriverStandingsStore = defineStore('driverStandings', () => {
     isLoaded,
     fetchLoading,
     error,
-    loadDriverStandings: load
+    loadDriverStandings: load,
+    getLatestConstructorId
   }
 })

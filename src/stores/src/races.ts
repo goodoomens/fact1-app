@@ -1,10 +1,11 @@
-import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import useFetchData from '@/composables/src/useFetchData.ts'
+import { defineStore } from 'pinia'
+import { useFetchData } from '@/composables'
+import { RaceEvent } from '@/models'
 
-import { Race } from '@/types/src/race'
+const STORE_KEY = 'races'
 
-const isUpcomingRace = (race: Race) => {
+const isUpcomingRace = (race: RaceEvent) => {
   const { date, time } = race
   const now = new Date()
   const raceDateTime = new Date(`${date}T${time}`)
@@ -14,26 +15,31 @@ const isUpcomingRace = (race: Race) => {
   )
 }
 
-export const useRacesStore = defineStore('races', () => {
-  const races = ref<Race[]>([])
+export default defineStore(STORE_KEY, () => {
+  const races = ref<RaceEvent[]>([])
   const isLoaded = ref(false)
   const error = ref<Error | null>(null)
   const { fetchData, fetchLoading } = useFetchData()
 
-  async function load() {
+  const load = async () => {
     if (isLoaded.value || fetchLoading.value) return
     try {
-      races.value = await fetchData('calendar')
+      races.value = await fetchData(STORE_KEY)
       isLoaded.value = true
     } catch (err: any) {
       error.value = err
-      console.error('[!] Error loading races:', err)
+      console.error(`[!] Error loading ${STORE_KEY}:`, err)
     }
   }
 
   const getRaceByCircuitId = computed(
     () => (circuitId: string) =>
-      races.value.find((race: Race) => race.Circuit.circuitId === circuitId)
+      races.value.find((race: RaceEvent) => race.Circuit.circuitId === circuitId)
+  )
+
+  const getFinishedRaces = computed(() => races.value.filter(race => !isUpcomingRace(race)))
+  const getFinishedRounds = computed(() =>
+    [...Array(getFinishedRaces.value.length).keys()].map(i => i + 1)
   )
 
   return {
@@ -43,6 +49,7 @@ export const useRacesStore = defineStore('races', () => {
     fetchLoading,
     error,
     loadRaces: load,
-    getRaceByCircuitId
+    getRaceByCircuitId,
+    getFinishedRounds
   }
 })

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { pickBy } from 'lodash'
 import { useRouting, useTime, useUnits } from '@/composables'
-import { useRacesStore } from '@/stores'
+import { useRacesStore, useResultsStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
 import {
   circuitIdFlag,
@@ -10,7 +10,9 @@ import {
   circuitIdTrack,
   circuitIdTrackDetails,
   degradationColorClasses,
-  scheduleColorClasses
+  scheduleColorClasses,
+  constructorIdTeamColor,
+  driverCodePhoto
 } from '@/mappings'
 import { ImgIcon, ObjectTable } from '@/components'
 import { Degradation } from '@/models'
@@ -18,7 +20,8 @@ import tire_icon from '@/assets/icons/tire.png'
 import brake_icon from '@/assets/icons/brake.png'
 
 const { locale } = useI18n()
-const { getRaceByCircuitId, nextRace, loadRaces } = useRacesStore()
+const { getRaceByCircuitId, nextRace } = useRacesStore()
+const { getCalendarResultByCircuitId } = useResultsStore()
 
 const { calculate } = useUnits(locale)
 
@@ -88,7 +91,13 @@ const detailIconMap = {
 
 const isNumber = (value: string) => !isNaN(parseFloat(value))
 
-onMounted(loadRaces)
+const result = computed(() => getCalendarResultByCircuitId(circuitId))
+
+const twOrderOutlinePosition = {
+  1: 'bg-yellow-50 border-yellow-400 order-1 sm:order-2',
+  2: 'bg-gray-50 border-gray-400 order-2 sm:order-1',
+  3: 'bg-orange-50 border-orange-600 order-3'
+}
 </script>
 
 <template>
@@ -127,15 +136,40 @@ onMounted(loadRaces)
             {{ race.Circuit.Location.locality }}
           </span>
         </div>
-        <span
-          class="text-white text-xs text-shadow-lg"
-        >{{
-            formatTime(race.date, race.time, { long: true, dateOnly: true })
-          }}</span
-        >
+        <span class="text-white text-xs text-shadow-lg">
+          {{ formatTime(race.date, race.time, { long: true, dateOnly: true }) }}
+        </span>
       </div>
 
       <div class="grid sm:grid-cols-2 gap-4 p-4">
+        <!-- Results -->
+        <div v-if="result" class="w-full grid sm:grid-cols-3 grid-cols-1 gap-5 col-span-2">
+          <div v-for="result in result.results" :key="result.Driver.driverId"
+               class="flex items-center justify-between px-4 py-2 rounded-lg border-2"
+               :class="twOrderOutlinePosition[result.position]"
+          >
+            <div class="flex flex-col gap-1">
+              <span class="text-xl font-semibold">P{{ result.position }}</span>
+              <span class="text-xs uppercase">{{ result.Driver.familyName }}</span>
+              <div class="flex items-center gap-1">
+                <i class="text-xs pi pi-clock"></i>
+                <span class="text-xs uppercase">{{ result.Time.time }}</span>
+              </div>
+            </div>
+            <div class="p-1 h-16 aspect-square">
+              <div
+                class="overflow-hidden rounded-full"
+                :class="constructorIdTeamColor[result.Constructor.constructorId]?.bg"
+              >
+                <img
+                  class="h-full w-full object-center object-contain"
+                  :src="driverCodePhoto[result.Driver.code]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <ObjectTable
           :title="$t('global.schedule')"
           :items="schedulDisplay"

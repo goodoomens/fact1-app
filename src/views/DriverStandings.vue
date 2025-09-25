@@ -6,18 +6,9 @@ import {
   constructorIdTeamColor,
   constructorIdTeamLogo
 } from '@/mappings'
-import { DriverStanding } from '@/types'
 
+const { getLatestConstructorId } = useDriverStandingsStore()
 const { driverStandings, isLoaded } = storeToRefs(useDriverStandingsStore())
-
-// Some drivers have multiple constructors
-const getLatestConstructorId = (standing: DriverStanding) => {
-  const length = standing.Constructors.length
-  if (length > 1) {
-    return standing.Constructors[length - 1]?.constructorId
-  }
-  return standing.Constructors[0]?.constructorId
-}
 </script>
 
 <template>

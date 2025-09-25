@@ -2,8 +2,6 @@ import Calendar from '@/views/Calendar.vue'
 import Race from '@/views/Race.vue'
 import TeamStandings from '@/views/TeamStandings.vue'
 import DriverStandings from '@/views/DriverStandings.vue'
-// import Dashboard from '@/views/Dashboard.vue'
-// import Settings from '@/views/Settings.vue'
 
 export const routes = [
   {
@@ -26,16 +24,6 @@ export const routes = [
     name: 'teamStandings',
     component: TeamStandings
   }
-  // {
-  //   path: '/dashboard',
-  //   name: 'dashboard',
-  //   component: Dashboard,
-  // },
-  // {
-  //   path: '/settings',
-  //   name: 'settings',
-  //   component: Settings,
-  // }
 ]
 
 export const navigationItems = [

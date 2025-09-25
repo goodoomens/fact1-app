@@ -1,5 +1,4 @@
-import { useRacesStore } from '@/stores/src/races'
-import { useDriverStandingsStore } from '@/stores/src/driverStandings'
-import { useTeamStandingsStore } from '@/stores/src/teamStandings'
-
-export { useRacesStore, useDriverStandingsStore, useTeamStandingsStore }
+export { default as useRacesStore } from './src/races'
+export { default as useDriverStandingsStore } from './src/driverStandings'
+export { default as useTeamStandingsStore } from './src/teamStandings'
+export { useResultsStore } from './src/results'

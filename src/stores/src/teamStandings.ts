@@ -1,22 +1,24 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import useFetchData from '@/composables/src/useFetchData.ts'
-import { TeamStanding } from '@/types'
+import { defineStore } from 'pinia'
+import { useFetchData } from '@/composables'
+import { TeamStanding } from '@/models'
 
-export const useTeamStandingsStore = defineStore('teamStandings', () => {
+const STORE_KEY = 'teamStandings'
+
+export default defineStore(STORE_KEY, () => {
   const teamStandings = ref<TeamStanding[]>([])
   const isLoaded = ref(false)
   const error = ref<Error | null>(null)
   const { fetchData, fetchLoading } = useFetchData()
 
-  async function load() {
+  const load = async () => {
     if (isLoaded.value || fetchLoading.value) return
     try {
-      teamStandings.value = await fetchData('teamStandings')
+      teamStandings.value = await fetchData(STORE_KEY)
       isLoaded.value = true
     } catch (err: any) {
       error.value = err
-      console.error('[!] Error loading teamStandings:', err)
+      console.error(`[!] Error loading ${STORE_KEY}:`, err)
     }
   }
 
