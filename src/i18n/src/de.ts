@@ -17,15 +17,16 @@ export default {
     units: 'Einheiten',
     high: 'HIGH',
     avg: 'AVG',
-    low: 'LOW'
+    low: 'LOW',
+    points: 'Punkte',
+    positions: 'Positionen'
   },
   actions: {
     hidePastRaces: 'Vergangene Rennen ausblenden',
     showPastRaces: 'Vergangene Rennen anzeigen',
     backToCalendar: 'Zurück zum Kalender',
     backToDriverStandings: 'Zurück zur Fahrerwertung',
-    show: 'Anzeigen',
-    compare: 'Vergleichen',
+    showStatistics: 'Statistiken anzeigen',
     exportToExcel: 'Als Excel exportieren'
   },
   details: {

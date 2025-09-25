@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { pickBy } from 'lodash'
 import { useRouting, useTime, useUnits } from '@/composables'
-import { ContentToolbar } from '@/components'
+import { ContentToolbar, RoundImage } from '@/components'
 import { useRacesStore, useResultsStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
 import {
@@ -107,27 +107,21 @@ const twOrderOutlinePosition = {
   </div>
   <ContentToolbar v-else>
     <template #toolbar>
-      <Button
-        size="small"
-        variant="text"
-        :label="$t('actions.backToCalendar')"
-        icon="pi pi-chevron-left"
-        @click="goTo('calendar')"
-      />
+      <Button size="small"
+              variant="text"
+              :label="$t('actions.backToCalendar')"
+              icon="pi pi-chevron-left"
+              @click="goTo('calendar')" />
     </template>
     <template #content>
-      <div
-        class="h-48 sm:h-64 md:h-88 bg-bottom bg-cover flex flex-col gap-4 items-start justify-end p-6"
-        :style="{
+      <div class="shrink-0 h-48 sm:h-64 bg-center bg-cover flex flex-col gap-4 items-start justify-end p-6"
+           :style="{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.0)), url(${image})`,
-        }"
-      >
-        <ImgIcon
-          class="shadow-lg"
-          :id="race.Circuit.circuitId"
-          :id-image-map="circuitIdFlag"
-          rounded="circle"
-        />
+        }">
+        <ImgIcon class="shadow-lg"
+                 :id="race.Circuit.circuitId"
+                 :id-image-map="circuitIdFlag"
+                 rounded="circle" />
         <div class="flex flex-col gap-1">
           <span class="text-2xl font-bold text-white leading-6 text-shadow-lg">
             {{ race.raceName }}
@@ -142,46 +136,32 @@ const twOrderOutlinePosition = {
         </span>
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-4 p-4">
-        <!-- Results -->
-        <div v-if="result" class="w-full grid sm:grid-cols-3 grid-cols-1 gap-5 col-span-2">
-          <div v-for="result in result.results" :key="result.Driver.driverId"
-               class="flex items-center justify-between px-4 py-2 rounded-lg border-2"
-               :class="twOrderOutlinePosition[result.position]"
-          >
-            <div class="flex flex-col gap-1">
-              <span class="text-xl font-semibold">P{{ result.position }}</span>
-              <span class="text-xs uppercase">{{ result.Driver.familyName }}</span>
-              <div class="flex items-center gap-1">
-                <i class="text-xs pi pi-clock"></i>
-                <span class="text-xs uppercase">{{ result.Time.time }}</span>
-              </div>
-            </div>
-            <div class="p-1 h-16 aspect-square">
-              <div
-                class="overflow-hidden rounded-full"
-                :class="constructorIdTeamColor[result.Constructor.constructorId]?.bg"
-              >
-                <img
-                  class="h-full w-full object-center object-contain"
-                  :src="driverCodePhoto[result.Driver.code]"
-                />
-              </div>
+      <!-- Results -->
+      <div v-if="result" class="w-full p-4 grid sm:grid-cols-3 grid-cols-1 gap-5 col-span-2">
+        <div v-for="result in result.results" :key="result.Driver.driverId"
+             class="flex items-center justify-between px-4 py-2 rounded-lg border-2"
+             :class="twOrderOutlinePosition[result.position]">
+          <div class="flex flex-col items-start gap-1">
+            <span class="text-xl font-semibold">P{{ result.position }}</span>
+            <span class="text-xs uppercase">{{ result.Driver.familyName }}</span>
+            <div class="flex items-center gap-1">
+              <i class="text-xs pi pi-clock"></i>
+              <span class="text-xs uppercase">{{ result.Time.time }}</span>
             </div>
           </div>
+          <RoundImage :class-name="constructorIdTeamColor[result.Constructor.constructorId]?.bg"
+                      :image="driverCodePhoto[result.Driver.code]" />
         </div>
+      </div>
 
-        <ObjectTable
-          :title="$t('global.schedule')"
-          :items="schedulDisplay"
-          columns="2/3"
-        >
+      <div class="grid sm:grid-cols-2 gap-4 p-4">
+        <ObjectTable :title="$t('global.schedule')"
+                     :items="schedulDisplay"
+                     columns="2/3">
           <template #key="{ props: { key } }">
             <div class="flex items-center gap-2">
-              <div
-                class="h-2 aspect-square rounded-full"
-                :class="scheduleColorClasses[key].bg"
-              />
+              <div class="h-2 aspect-square rounded-full"
+                   :class="scheduleColorClasses[key].bg" />
               <span class="text-xs">{{ $t(`schedule.${key}`) }}</span>
             </div>
           </template>
@@ -190,19 +170,15 @@ const twOrderOutlinePosition = {
           </template>
         </ObjectTable>
 
-        <ObjectTable
-          :title="$t('global.trackDetails')"
-          :items="detailsDisplay"
-          columns="2/3"
-        >
+        <ObjectTable :title="$t('global.trackDetails')"
+                     :items="detailsDisplay"
+                     columns="2/3">
           <template #key="{ props: { key } }">
             <span>{{ $t(`details.${key}`) }}</span>
           </template>
           <template #value="{ props: { key, value } }">
-            <Tag
-              v-if="value in Degradation"
-              :class="[getBgClass(value as Degradation)]"
-            >
+            <Tag v-if="value in Degradation"
+                 :class="[getBgClass(value as Degradation)]">
               <img class="h-3" :src="detailIconMap[key]" />
               {{ $t(`degradation.${value}`) }}
             </Tag>
@@ -210,10 +186,8 @@ const twOrderOutlinePosition = {
           </template>
         </ObjectTable>
 
-        <div
-          v-if="circuitIdTrack[circuitId]"
-          class="p-4 flex items-center justify-center dark:invert"
-        >
+        <div v-if="circuitIdTrack[circuitId]"
+             class="p-4 flex items-center justify-center dark:invert">
           <img class="w-2/3 sm:w-full" :src="circuitIdTrack[circuitId]" />
         </div>
       </div>

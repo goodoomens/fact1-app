@@ -43,7 +43,7 @@ const driverIsSelected = (driver: any) => {
         size="small"
         variant="text"
         :disabled="driverIds.length === 0"
-        :label="driverIds.length <= 1 ? $t('actions.show') : $t('actions.compare')"
+        :label="$t('actions.showStatistics')"
         icon="pi pi-chart-line"
         @click="() => goTo('driverStatistics', { driverIds })"
       />
@@ -51,10 +51,10 @@ const driverIsSelected = (driver: any) => {
 
     <template #content>
       <template
-        v-for="standing in driverStandings"
+        v-for="(standing, idx) in driverStandings"
         :key="standing.Driver.driverId"
       >
-        <hr class="border-neutral-200 dark:border-neutral-900" />
+        <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
         <div
           class="relative h-16 w-full cursor-pointer grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
           :class="driverIsSelected(standing) ? 'bg-neutral-100' : ''"

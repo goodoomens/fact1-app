@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useUnits } from '@/composables'
 import { NavigationDesktop, LanguageSwitcher, TextSeparator, SimpleDialog, ToggleButton } from '@/components'
@@ -13,6 +13,7 @@ const { unit: currentUnit } = useUnits(currentLocale)
 const options = ['km', 'miles']
 
 const logoVisible = ref<boolean>(true)
+onMounted(() => setTimeout(() => logoVisible.value = false, 8000))
 </script>
 
 <template>

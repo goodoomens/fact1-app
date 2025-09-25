@@ -17,15 +17,16 @@ export default {
     units: 'Eenheden',
     high: 'HIGH',
     avg: 'AVG',
-    low: 'LOW'
+    low: 'LOW',
+    points: 'Punten',
+    positions: 'Posities'
   },
   actions: {
     hidePastRaces: 'Verberg afgelopen races',
     showPastRaces: 'Toon afgelopen races',
     backToCalendar: 'Terug naar kalender',
     backToDriverStandings: 'Terug naar rijdersstand',
-    show: 'Bekijken',
-    compare: 'Vergelijken',
+    showStatistics: 'Toon statistieken',
     exportToExcel: 'Exporteer naar Excel'
   },
   details: {

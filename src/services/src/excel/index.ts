@@ -1,39 +1,28 @@
+import { saveAs } from 'file-saver'
 import ExcelJS from 'exceljs'
 import type { Worksheet } from 'exceljs'
 import type { ExcelExportConfig, ExcelTableConfig } from './types'
 
-function addTitle(ws: Worksheet, title: string) {
-  ws.getCell('A1').value = title
+const addTitle = (ws: Worksheet, title: string): void => {
+  ws.addRow([title])
 }
 
-function addTable(ws: Worksheet, table: ExcelTableConfig) {
-  ws.addRow(table.headers)
-  table.rows.forEach((r) => ws.addRow(r))
+const addTable = (ws: Worksheet, { headers, rows }: ExcelTableConfig): void => {
+  ws.addRow(headers)
+  rows.forEach(row => ws.addRow(row))
 }
 
-export const exportFile = async (config: ExcelExportConfig): Promise<void> => {
+export const exportFile = async ({ sheets, filename }: ExcelExportConfig): Promise<void> => {
   const wb = new ExcelJS.Workbook()
-  const now = new Date()
-  wb.created = now
-  wb.modified = now
-  wb.calcProperties.fullCalcOnLoad = true
 
-  config.sheets.forEach((sheet) => {
-    const ws = wb.addWorksheet(sheet.name)
-    if (sheet.title) addTitle(ws, sheet.title)
-    sheet.tables.forEach((t) => addTable(ws, t))
+  sheets.forEach(({ name, title, tables }) => {
+    const ws = wb.addWorksheet(name)
+    if (title) addTitle(ws, title)
+    tables?.forEach(table => addTable(ws, table))
   })
 
   const buffer = await wb.xlsx.writeBuffer()
-  const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = config.filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  URL.revokeObjectURL(url)
+  saveAs(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), filename)
 }
 
 export default { exportFile }

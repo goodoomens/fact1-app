@@ -17,15 +17,16 @@ export default {
     units: 'Units',
     high: 'HIGH',
     avg: 'AVG',
-    low: 'LOW'
+    low: 'LOW',
+    points: 'Points',
+    positions: 'Positions'
   },
   actions: {
     hidePastRaces: 'Hide past races',
     showPastRaces: 'Show past races',
     backToCalendar: 'Back to calendar',
     backToDriverStandings: 'Back to driver standings',
-    show: 'Show',
-    compare: 'Compare',
+    showStatistics: 'Show statistics',
     exportToExcel: 'Export to Excel'
   },
   details: {

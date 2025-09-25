@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-import TeamStandings from '../../src/views/TeamStandings.vue'
+import TeamStandings from '../../src/pages/TeamStandings.vue'
 import { useTeamStandingsStore } from '../../src/stores'
 
 vi.mock('@/mappings', () => ({

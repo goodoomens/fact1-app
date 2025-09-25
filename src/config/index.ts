@@ -1,0 +1,1 @@
+export { default as CHART_CONFIG } from './src/chart'

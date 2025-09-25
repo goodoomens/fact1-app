@@ -57,10 +57,10 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
     </template>
     <template #content>
       <template
-        v-for="race in hidePastRaces ? races?.filter(isUpcomingRace) : races"
+        v-for="(race, idx) in hidePastRaces ? races?.filter(isUpcomingRace) : races"
         :key="race.Circuit.circuitId"
       >
-        <hr class="border-neutral-200 dark:border-neutral-900" />
+        <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
         <RaceCalendarCard @click="onRaceClick(race.Circuit.circuitId)">
           <template #tag v-if="race === nextRace">
             <RoundTag :label="raceIsToday(race) ? 'today' : 'next'" />

@@ -1,8 +1,8 @@
-import Calendar from '@/views/Calendar.vue'
-import Race from '@/views/Race.vue'
-import TeamStandings from '@/views/TeamStandings.vue'
-import DriverStandings from '@/views/DriverStandings.vue'
-import DriverStatistics from '@/views/DriverStatistics.vue'
+import Calendar from '@/pages/Calendar.vue'
+import Race from '@/pages/Race.vue'
+import TeamStandings from '@/pages/TeamStandings.vue'
+import DriverStandings from '@/pages/driver/DriverStandings.vue'
+import DriverStatistics from '@/pages/driver/DriverStatistics.vue'
 
 export const routes = [
   {

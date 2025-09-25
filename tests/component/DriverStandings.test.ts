@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-import DriverStandings from '../../src/views/DriverStandings.vue'
+import DriverStandings from '../../src/pages/driver/DriverStandings.vue'
 import { useDriverStandingsStore } from '../../src/stores'
 
 vi.mock('@/mappings', () => ({
