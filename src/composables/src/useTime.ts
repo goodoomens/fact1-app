@@ -1,3 +1,5 @@
+import type { Ref } from 'vue'
+
 const localeMap = {
   'en': 'en-US',
   'de': 'de-DE',
@@ -11,7 +13,7 @@ type Options = {
   dateOnly?: boolean
 }
 
-export default (locale: string) => {
+export default (locale: Ref<string>) => {
   const format = (date: string, time: string, options: Options = {
     long: false,
     weekdayShort: false,
@@ -28,17 +30,17 @@ export default (locale: string) => {
 
     if (options.long) dateOptions.weekday = options.weekdayShort ? 'short' : 'long'
 
-    const datePart = new Intl.DateTimeFormat(localeMap[locale] || 'en-US', dateOptions).format(d)
+    const datePart = new Intl.DateTimeFormat(localeMap[locale.value] || 'en-US', dateOptions).format(d)
 
-    const timePart = d.toLocaleTimeString(localeMap[locale] || 'en-US', {
+    const timePart = d.toLocaleTimeString(localeMap[locale.value] || 'en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: locale === 'en'
+      hour12: locale.value === 'en'
     })
 
     if (options.dateOnly) return datePart
 
-    return locale === 'de'
+    return locale.value === 'de'
       ? `${datePart} ${timePart} Uhr`
       : `${datePart} ${timePart}`
   }

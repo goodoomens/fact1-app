@@ -13,7 +13,7 @@ import type { RaceEvent } from '@/models'
 const { goTo } = useRouting()
 const { locale } = useI18n()
 
-const { format: formatTime } = useTime(locale.value as 'de' | 'en')
+const { format: formatTime } = useTime(locale)
 
 const { races, isLoaded } = storeToRefs(useRacesStore())
 const hidePastRaces = ref(JSON.parse(localStorage.getItem('hidePastRaces') ?? 'false'))
