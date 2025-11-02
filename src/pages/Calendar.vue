@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouting, useTime } from '@/composables'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRouting, useTime, useWeather } from '@/composables'
 import { useRacesStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { circuitIdFlag, scheduleColorClasses } from '@/mappings'
@@ -14,6 +14,7 @@ const { goTo } = useRouting()
 const { locale } = useI18n()
 
 const { format: formatTime } = useTime(locale)
+const { get: getForecast, isLoading, ensureForRaces } = useWeather()
 
 const { races, isLoaded } = storeToRefs(useRacesStore())
 const hidePastRaces = ref(JSON.parse(localStorage.getItem('hidePastRaces') ?? 'false'))
@@ -39,7 +40,20 @@ const raceIsToday = (race: RaceEvent) => {
   return now === raceDate
 }
 
+const visibleRaces = computed(() => (hidePastRaces.value ? races.value?.filter(isUpcomingRace) : races.value) || [])
+
+onMounted(() => {
+  if (visibleRaces.value.length) ensureForRaces(visibleRaces.value)
+})
+
+watch([visibleRaces, isLoaded], ([vr, loaded]) => {
+  if (loaded && vr?.length) ensureForRaces(vr)
+}, { immediate: true })
+
 const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
+
+const forecastFor = (race: RaceEvent) => getForecast(race.Circuit.circuitId, race.date)
+const loadingForecast = (race: RaceEvent) => isLoading(race.Circuit.circuitId, race.date)
 </script>
 
 <template>
@@ -93,6 +107,28 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
               :label="$t('schedule.sprint')"
               :class="scheduleColorClasses['sprintRace'].text"
             />
+            <div v-if="isUpcomingRace(race)"
+                 class="text-xs text-neutral-600 dark:text-neutral-200 flex items-center gap-2 mt-1">
+              <template v-if="loadingForecast(race)">
+                <span>Forecasting…</span>
+              </template>
+              <template v-else>
+                <template v-if="forecastFor(race)">
+                  <span v-if="forecastFor(race)?.weatherIcon"
+                        class="text-base leading-none">{{ forecastFor(race)?.weatherIcon }}</span>
+                  <span v-if="forecastFor(race)?.tempMin != null && forecastFor(race)?.tempMax != null">
+                    {{ Math.round(forecastFor(race)!.tempMin!) }} – {{ Math.round(forecastFor(race)!.tempMax!)
+                    }}{{ forecastFor(race)!.units.temp }}
+                  </span>
+                  <span v-if="forecastFor(race)?.precipitationProbabilityMax != null" class="opacity-80">
+                    ☔️ {{ forecastFor(race)!.precipitationProbabilityMax }}%
+                  </span>
+                </template>
+                <template v-else>
+                  <span class="opacity-70">Forecast available closer to date</span>
+                </template>
+              </template>
+            </div>
           </template>
           <template #append>
             <img
