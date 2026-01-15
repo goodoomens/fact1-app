@@ -1,7 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetchData } from '@/composables'
-import { delay } from '@/utils'
 import type { Race, CalendarResult, DriverResult } from '@/models'
 import { useConfigStore } from '@/stores'
 
@@ -23,7 +22,6 @@ export const useResultsStore = defineStore(STORE_KEY, () => {
         for (const round of rounds) {
           const res = await fetchData(STORE_KEY, { round, year: configStore.currentYear })
           if (res) results.value.push(res)
-          await delay(300)
         }
       } else {
         const res = await fetchData(STORE_KEY, { year: configStore.currentYear })

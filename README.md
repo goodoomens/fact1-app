@@ -15,12 +15,12 @@ A modern, responsive Formula 1 application built with Vue 3 that provides a race
 - **📱 Responsive Design** - Optimized for desktop and mobile devices
 - **🎨 Modern UI** - Built with Tailwind CSS and PrimeVue components
 - **🌐 Multi-language Support** - Available in English, German, and Dutch
+- **💾 Local Caching** - All API data is cached in local storage for 24 hours to improve performance and reduce API calls
 
 ## ToDos
 
 - **👤 Driver Detail Pages** - Individual driver profiles
 - **🌤️ Weather Forecast** - Weather predictions for upcoming races
-- **💾 Improved Data Management** - BFF for data fetching and caching
 
 ## Tech Stack
 

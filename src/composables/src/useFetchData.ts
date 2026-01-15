@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { get } from 'lodash'
+import { delay } from '@/utils'
 
 type FetchKey = 'races' | 'driverStandings' | 'teamStandings' | 'results'
 
@@ -46,9 +47,32 @@ export default () => {
         ? API_URLS[key].url(options)
         : API_URLS[key].url
 
+    const cacheKey = `cache_${url}`
+    const cachedData = localStorage.getItem(cacheKey)
+
+    if (cachedData) {
+      try {
+        const { data, timestamp } = JSON.parse(cachedData)
+        if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+          fetchLoading.value = false
+          return data
+        }
+      } catch (e) {
+        console.warn('Failed to parse cached data', e)
+      }
+    }
+
     try {
+      await delay(500)
       const response = await axios.get(url)
-      return get(response.data, API_URLS[key].path)
+      const data = get(response.data, API_URLS[key].path)
+      
+      localStorage.setItem(cacheKey, JSON.stringify({
+        data,
+        timestamp: Date.now()
+      }))
+
+      return data
     } finally {
       fetchLoading.value = false
     }
