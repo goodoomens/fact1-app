@@ -6,6 +6,7 @@ export default {
     dontShowAgain: 'Niet meer tonen'
   },
   global: {
+    appDescription: 'Formule 1 Seizoensoverzicht',
     trackDetails: 'Circuitdetails',
     schedule: 'Schema',
     pts: 'Ptn',
@@ -54,5 +55,16 @@ export default {
     medium: 'Medium',
     high: 'High',
     veryHigh: 'Very High'
+  },
+  warnings: {
+    calendar: {
+      noData: 'Voor dit seizoen zijn er geen races beschikbaar. Kies een eerder seizoen in het menu.'
+    },
+    driverStandings: {
+      noData: 'Voor dit seizoen zijn er geen coureursstanden beschikbaar. Kies een eerder seizoen in het menu.'
+    },
+    teamStandings: {
+      noData: 'Voor dit seizoen zijn er geen teamstanden beschikbaar. Kies een eerder seizoen in het menu.'
+    }
   }
 }

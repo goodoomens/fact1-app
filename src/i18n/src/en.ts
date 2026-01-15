@@ -6,6 +6,7 @@ export default {
     dontShowAgain: 'Dont show again'
   },
   global: {
+    appDescription: 'Formula 1 Season Overview',
     trackDetails: 'Track Details',
     schedule: 'Schedule',
     pts: 'Pts',
@@ -54,5 +55,16 @@ export default {
     medium: 'Medium',
     high: 'High',
     veryHigh: 'Very High'
+  },
+  warnings: {
+    calendar: {
+      noData: 'No races available for the selected season. Select a previous season from the menu.'
+    },
+    driverStandings: {
+      noData: 'No driver standings available for the selected season. Select a previous season from the menu.'
+    },
+    teamStandings: {
+      noData: 'No team standings available for the selected season. Select a previous season from the menu.'
+    }
   }
 }

@@ -77,7 +77,8 @@ const onExport = () => exportDriverStatistics(props.driverIds, results)
               class="py-2 sm:py-6 flex flex-col gap-4 items-center dark:bg-neutral-800 rounded-lg outline-2 outline-neutral-200"
             >
               <div class="flex items-center gap-2">
-                <RoundImage :class-name="constructorIdTeamColor[driver.constructorId]?.bg"
+                <RoundImage v-if="driverIdPhoto[driver.id]"
+                            :class-name="constructorIdTeamColor[driver.constructorId]?.bg"
                             :image="driverIdPhoto[driver.id]" />
                 <div class="flex flex-col">
                   <span class="font-bold text-xl">{{ driver.code }}</span>
@@ -89,7 +90,7 @@ const onExport = () => exportDriverStatistics(props.driverIds, results)
                 </div>
               </div>
               <!-- Positions -->
-              <div class="grid grid-cols-2 items-center w-full px-4 sm:px-10">
+              <div class="grid grid-cols-2 items-center w-full px-4 sm:px-10 mt-auto">
                 <span class="text-xl font-extralight">{{ $t('global.high') }}</span>
                 <span class="text-2xl font-bold text-right">{{ getPositionStatsByDriverId(driver.id)?.best }}</span>
                 <span class="text-xl font-extralight">{{ $t('global.avg') }}</span>

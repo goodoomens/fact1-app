@@ -50,14 +50,19 @@ const driverIsSelected = (driver: any) => {
     </template>
 
     <template #content>
-      <template
-        v-for="(standing, idx) in driverStandings"
-        :key="standing.Driver.driverId"
-      >
-        <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
+      <div v-if="!driverStandings?.length" class="mt-6 max-w-md flex flex-col items-center justify-center p-8 text-center gap-4 mx-auto">
+        <i class="pi pi-info-circle text-4xl text-neutral-400" />
+        <span class="text-neutral-500">{{ $t('warnings.driverStandings.noData') }}</span>
+      </div>
+      <div v-else class="flex flex-col w-full h-full">
+        <template
+          v-for="(standing, idx) in driverStandings"
+          :key="standing.Driver.driverId"
+        >
+        <hr v-if="idx !== 0" class="w-full border-neutral-200 dark:border-neutral-900" />
         <div
-          class="relative h-16 w-full cursor-pointer grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-90 dark:bg-neutral-800"
-          :class="driverIsSelected(standing) ? 'bg-neutral-200 dark:bg-neutral-900' : ''"
+          class="relative h-16 w-full cursor-pointer grid grid-cols-[auto_auto_8fr_1fr] items-center justify-items-start hover:brightness-95 dark:bg-neutral-800"
+          :class="driverIsSelected(standing) ? 'bg-neutral-200 dark:bg-neutral-900' : 'bg-white'"
           @click="toggleDriver(standing)"
         >
         <span
@@ -65,21 +70,24 @@ const driverIsSelected = (driver: any) => {
         >
           {{ standing.position }}
         </span>
-          <div class="p-1 h-16 aspect-square">
+          <div class="p-1 w-16 aspect-square">
             <div
-              class="overflow-hidden rounded-full"
-              :class="constructorIdTeamColor[getLatestConstructorId(standing)]?.bg"
+              class="h-full w-full flex items-center justify-center overflow-hidden rounded-full"
+              :class="constructorIdTeamColor[getLatestConstructorId(standing)]?.bg || constructorIdTeamColor['default']?.bg"
             >
               <img
-                class="h-full w-full object-center object-contain"
+                v-if="driverCodePhoto[standing.Driver.code]"
+                class="object-center object-contain"
                 :src="driverCodePhoto[standing.Driver.code]"
               />
+              <i v-else class="pi pi-user text-3xl" :class="constructorIdTeamColor['default']?.text" />
             </div>
           </div>
           <div class="flex flex-col ml-4">
             <span class="font-bold">{{ standing.Driver.familyName.toUpperCase() }}</span>
             <div class="flex gap-2">
               <img
+                v-if="constructorIdTeamLogo[getLatestConstructorId(standing)]"
                 class="h-4"
                 :src="constructorIdTeamLogo[getLatestConstructorId(standing)]"
               />
@@ -96,6 +104,7 @@ const driverIsSelected = (driver: any) => {
           </div>
         </div>
       </template>
+      </div>
     </template>
   </ContentToolbar>
 </template>

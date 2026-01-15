@@ -38,5 +38,9 @@ export default {
   sauber: {
     bg: 'bg-[#5CB130]',
     text: 'text-[#000000]'
+  },
+  default: {
+    bg: 'bg-[#000000]',
+    text: 'text-[#FFFFFF]'
   }
 }

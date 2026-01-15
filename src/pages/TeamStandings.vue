@@ -9,7 +9,12 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
 <template>
   <ProgressBar v-if="!isLoaded" mode="indeterminate" data-ident="progress"></ProgressBar>
   <div v-else class="flex flex-col w-full h-full">
+    <div v-if="!teamStandings?.length" class="mt-8 max-w-md flex flex-col items-center justify-center p-8 text-center gap-4 mx-auto">
+      <i class="pi pi-info-circle text-4xl text-neutral-400" />
+      <span class="text-neutral-500">{{ $t('warnings.teamStandings.noData') }}</span>
+    </div>
     <template
+      v-else
       v-for="(standing, idx) in teamStandings"
       :key="`${standing.Constructor.constructorId}-${standing.position}`"
     >

@@ -7,8 +7,8 @@ const { arrivedState } = useScroll(container)
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col" ref="container">
-    <div class="flex p-4 sticky top-0 bg-white dark:bg-neutral-800 transition-shadow z-10"
+  <div class="w-full h-full flex flex-col items-center" ref="container">
+    <div class="w-full flex p-4 sticky top-0 bg-white dark:bg-neutral-800 transition-shadow z-10"
          :class="{ 'shadow-xl': !arrivedState.top, 'border-b border-neutral-200 dark:border-neutral-900': arrivedState.top }">
       <slot name="toolbar" />
     </div>

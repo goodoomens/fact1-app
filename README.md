@@ -5,22 +5,24 @@ A modern, responsive Formula 1 application built with Vue 3 that provides a race
 ## Live Demo
 [Fact1 on Netlify](https://fact1.netlify.app)
 
-## ✨ Features
+## Features
 
-- **📅 Race Calendar** - View upcoming and past F1 races with circuit information
-- **🏆 Driver Standings** - Current championship standings with driver photos and team colors
+- **📅 Race Calendar** - View F1 races for current and past seasons
+- **📅 Season Switcher** - Easily switch between the current season and the last 4 years
+- **🏆 Driver Standings** - Championship standings with driver photos and team colors
 - **🏁 Team Standings** - Constructor championship standings with team logos and branding
 - **🏃‍♂️ Race Details** - Detailed race information including sprint races
 - **📱 Responsive Design** - Optimized for desktop and mobile devices
 - **🎨 Modern UI** - Built with Tailwind CSS and PrimeVue components
+- **🌐 Multi-language Support** - Available in English, German, and Dutch
 
-## 📋 ToDos
+## ToDos
 
 - **👤 Driver Detail Pages** - Individual driver profiles
 - **🌤️ Weather Forecast** - Weather predictions for upcoming races
 - **💾 Improved Data Management** - BFF for data fetching and caching
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: Vue 3 with Composition API
 - **Language**: TypeScript
@@ -64,13 +66,6 @@ npm run dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
-## 📜 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run build:check` - Type-check and build
-- `npm run preview` - Preview production build
-
 ## 🏗️ Project Structure
 
 ```
@@ -93,14 +88,16 @@ src/
 ### Race Calendar
 
 - Interactive calendar showing all F1 races
+- Global year selection to view different seasons
 - Toggle to hide/show past races
 - Highlight upcoming and current race
 
 ### Driver & Team Standings
 
-- Championship standings
+- Season-specific championship standings
 - Constructor information
 - Points and positions
+- "No data" hints for upcoming or empty seasons
 
 ### Responsive Design
 

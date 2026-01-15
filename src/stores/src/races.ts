@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetchData } from '@/composables'
 import { RaceEvent } from '@/models'
+import { useConfigStore } from '@/stores'
 
 const STORE_KEY = 'races'
 
@@ -9,26 +10,35 @@ const isUpcomingRace = (race: RaceEvent) => {
   const { date, time } = race
   const now = new Date()
   const raceDateTime = new Date(`${date}T${time}`)
-  return (
-    raceDateTime > now &&
-    raceDateTime < new Date(raceDateTime.getTime() + 24 * 60 * 60 * 1000)
-  )
+  return raceDateTime > now
 }
 
 export default defineStore(STORE_KEY, () => {
+  const configStore = useConfigStore()
   const races = ref<RaceEvent[]>([])
   const isLoaded = ref(false)
   const error = ref<Error | null>(null)
   const { fetchData, fetchLoading } = useFetchData()
 
-  const load = async () => {
-    if (isLoaded.value || fetchLoading.value) return
+  const load = async (year?: number | string) => {
+    const targetYear = year ?? configStore.currentYear
+    if (targetYear !== configStore.currentYear) {
+      configStore.setYear(Number(targetYear))
+    }
+
+    const loadedYear = races.value.length > 0 ? races.value[0].season : null
+
+    if (isLoaded.value && String(loadedYear) === String(targetYear)) return
+
+    fetchLoading.value = true
     try {
-      races.value = await fetchData(STORE_KEY)
+      races.value = await fetchData(STORE_KEY, { year: targetYear })
       isLoaded.value = true
     } catch (err: any) {
       error.value = err
       console.error(`[!] Error loading ${STORE_KEY}:`, err)
+    } finally {
+      fetchLoading.value = false
     }
   }
 
@@ -48,6 +58,7 @@ export default defineStore(STORE_KEY, () => {
     isLoaded,
     fetchLoading,
     error,
+    currentYear: computed(() => configStore.currentYear),
     loadRaces: load,
     getRaceByCircuitId,
     getFinishedRounds

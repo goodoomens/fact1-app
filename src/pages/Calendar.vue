@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouting, useTime } from '@/composables'
-import { useRacesStore } from '@/stores'
+import { useRacesStore, useConfigStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { circuitIdFlag, scheduleColorClasses } from '@/mappings'
 import { useI18n } from 'vue-i18n'
@@ -16,22 +16,23 @@ const { locale } = useI18n()
 const { format: formatTime } = useTime(locale)
 
 const { races, isLoaded } = storeToRefs(useRacesStore())
+const configStore = useConfigStore()
+
 const hidePastRaces = ref(JSON.parse(localStorage.getItem('hidePastRaces') ?? 'false'))
 const toggleHidePastRaces = () => {
   hidePastRaces.value = !hidePastRaces.value
   localStorage.setItem('hidePastRaces', String(hidePastRaces.value))
 }
 
-const nextRace = computed(() => races.value?.find(isUpcomingRace))
 const isUpcomingRace = (race: RaceEvent) => {
   const { date, time } = race
   const now = new Date()
   const raceDateTime = new Date(`${date}T${time}`)
-  return (
-    raceDateTime > now &&
-    raceDateTime < new Date(raceDateTime.getTime() + 24 * 60 * 60 * 1000)
-  )
+  return raceDateTime > now
 }
+const nextRace = computed(() => races.value?.find(isUpcomingRace))
+const hasNextRace = computed(() => !!nextRace.value)
+const hasPastRaces = computed(() => races.value?.some((race) => !isUpcomingRace(race)))
 const isSprintRace = (race: RaceEvent) => !!race.Sprint
 const raceIsToday = (race: RaceEvent) => {
   const now = new Date().toDateString()
@@ -52,15 +53,21 @@ const onRaceClick = (circuitId: string) => goTo('race', { circuitId })
         variant="text"
         :label="hidePastRaces ? $t('actions.showPastRaces') : $t('actions.hidePastRaces')"
         :icon="`pi ${hidePastRaces ? 'pi-eye' : 'pi-eye-slash'}`"
+        :disabled="!hasPastRaces || !hasNextRace"
         @click="toggleHidePastRaces"
       />
     </template>
     <template #content>
+      <div v-if="!races?.length" class="max-w-md flex flex-col items-center justify-center p-8 text-center gap-4 mx-auto">
+        <i class="pi pi-info-circle text-4xl text-neutral-400" />
+        <span class="text-neutral-500">{{ $t('warnings.calendar.noData') }}</span>
+      </div>
       <template
+        v-else
         v-for="(race, idx) in hidePastRaces ? races?.filter(isUpcomingRace) : races"
         :key="race.Circuit.circuitId"
       >
-        <hr v-if="idx !== 0" class="border-neutral-200 dark:border-neutral-900" />
+        <hr v-if="idx !== 0" class="w-full border-neutral-200 dark:border-neutral-900" />
         <RaceCalendarCard @click="onRaceClick(race.Circuit.circuitId)">
           <template #tag v-if="race === nextRace">
             <RoundTag :label="raceIsToday(race) ? 'today' : 'next'" />

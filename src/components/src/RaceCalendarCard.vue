@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 py-4 cursor-pointer flex gap-4 items-center bg-white dark:bg-neutral-800 hover:brightness-95">
+  <div class="w-full px-6 py-4 cursor-pointer flex gap-4 items-center bg-white dark:bg-neutral-800 hover:brightness-95">
     <div class="relative">
       <slot name="image" />
       <div v-if="$slots.tag" class="absolute-center">

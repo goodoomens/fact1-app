@@ -2,19 +2,28 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetchData } from '@/composables'
 import { DriverStanding } from '@/models'
+import { useConfigStore } from '@/stores'
 
 const STORE_KEY = 'driverStandings'
 
 export default defineStore(STORE_KEY, () => {
+  const configStore = useConfigStore()
   const driverStandings = ref<DriverStanding[]>([])
   const isLoaded = ref(false)
   const error = ref<Error | null>(null)
   const { fetchData, fetchLoading } = useFetchData()
 
   const load = async () => {
-    if (isLoaded.value || fetchLoading.value) return
+    const targetYear = configStore.currentYear
+    // Wir prüfen, ob die bereits geladenen Daten zum aktuellen Jahr passen
+    // Falls wir keine Daten haben oder das Jahr nicht übereinstimmt, laden wir neu.
+    // In der Ergast API haben DriverStandings leider nicht direkt ein season Feld in den Items,
+    // aber wir können isLoaded zurücksetzen, wenn sich das Jahr im Store ändert.
+    
+    if (isLoaded.value) return
+    
     try {
-      driverStandings.value = await fetchData(STORE_KEY)
+      driverStandings.value = await fetchData(STORE_KEY, { year: targetYear })
       isLoaded.value = true
     } catch (err: any) {
       error.value = err

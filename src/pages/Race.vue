@@ -114,7 +114,7 @@ const twOrderOutlinePosition = {
               @click="goTo('calendar')" />
     </template>
     <template #content>
-      <div class="shrink-0 h-48 sm:h-64 bg-center bg-cover flex flex-col gap-4 items-start justify-end p-6"
+      <div class="w-full shrink-0 h-48 sm:h-64 bg-center bg-cover flex flex-col gap-4 items-start justify-end p-6"
            :style="{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.0)), url(${image})`,
         }">

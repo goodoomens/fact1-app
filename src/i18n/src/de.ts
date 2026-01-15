@@ -6,6 +6,7 @@ export default {
     dontShowAgain: 'Nicht mehr anzeigen'
   },
   global: {
+    appDescription: 'Formel 1 Saisonübersicht',
     trackDetails: 'Streckeninformationen',
     schedule: 'Zeitplan',
     pts: 'Pkt',
@@ -54,5 +55,16 @@ export default {
     medium: 'Mittel',
     high: 'Hoch',
     veryHigh: 'Sehr Hoch'
+  },
+  warnings: {
+    calendar: {
+      noData: 'Für diese Saison sind keine Rennen verfügbar. Wähle im Menü eine frühere Saison.'
+    },
+    driverStandings: {
+      noData: 'Für diese Saison sind keine Fahrerwertungen verfügbar. Wähle im Menü eine frühere Saison.'
+    },
+    teamStandings: {
+      noData: 'Für diese Saison sind keine Teamwertungen verfügbar. Wähle im Menü eine frühere Saison.'
+    }
   }
 }
