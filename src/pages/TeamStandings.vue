@@ -31,9 +31,10 @@ const { teamStandings, isLoaded } = storeToRefs(useTeamStandingsStore())
         <div class="flex items-center justify-center gap-5 h-full">
           <div
             class="w-2 h-2/3 py-2 rounded"
-            :class="constructorIdTeamColor[standing.Constructor.constructorId].bg"
+            :class="constructorIdTeamColor[standing.Constructor.constructorId]?.bg"
           />
           <img
+            v-if="constructorIdTeamLogo[standing.Constructor.constructorId]"
             class="w-10 object-center object-contain"
             :src="constructorIdTeamLogo[standing.Constructor.constructorId]"
           />
