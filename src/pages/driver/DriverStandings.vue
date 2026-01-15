@@ -70,7 +70,7 @@ const driverIsSelected = (driver: any) => {
         >
           {{ standing.position }}
         </span>
-          <div class="p-1 w-16 aspect-square">
+          <div class="p-1 h-16 aspect-square">
             <div
               class="h-full w-full flex items-center justify-center overflow-hidden rounded-full"
               :class="constructorIdTeamColor[getLatestConstructorId(standing)]?.bg || constructorIdTeamColor['default']?.bg"
