@@ -36,7 +36,7 @@ A modern, responsive Formula 1 application built with Vue 3 that provides a race
 - **Charts**: Highcharts
 - **Excel**: ExcelJS
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -66,7 +66,7 @@ npm run dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 src/
@@ -83,7 +83,7 @@ src/
 └── views/         # Page components
 ```
 
-## 🎯 Key Features in Detail
+## Key Features in Detail
 
 ### Race Calendar
 
@@ -105,7 +105,7 @@ src/
 - Optimized for various screen sizes
 - Touch-friendly interface
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -113,6 +113,6 @@ src/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
